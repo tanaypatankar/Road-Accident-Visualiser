@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="stylesheet" href="/style.css">
+    <title>Document</title>
+</head>
+<body>
+    <h1 style="text-align: center;">Visualiser</h1>
+    <div class="container mt-4">
+        <div class="card">
+            <div class="card-header">
+                Select Data
+            </div>
+            <div class="card-body">
+                <form action="/auth/createvis" method="POST">
+                    <div class="form-group">
+                        <label for="data_column">Data to Visualise</label>
+                        <select class="form-control" id="data_column" name="data_column">
+                            <option value="age_band_driver;vehicle">Age Band of Driver</option>
+                            <option value="skidding;vehicle">Skidding</option>
+                            <option value="gender;vehicle">Gender of driver</option>
+                            <option value="home_area_type;vehicle">Type of Home Area of Driver</option>
+                            <option value="hit_object;vehicle">Hit Object</option>
+                            <option value="journey_purpose;vehicle">Purpose of the Journey</option>
+                            <option value="vehicle_type;vehicle">Type of Vehicle</option>
+                            <option value="vehicle_manoeuvre;vehicle">Vehicle Manoeuvre</option>
+                            <option value="vehicle_location;vehicle">Location of Vehicle</option>
+                            <option value="junction_location;vehicle">Location of Junction</option>
+                            <option value="point_of_impact;vehicle">Point of Impact</option>
+                            <option value="left_hand_drive;vehicle">Left Hand Drive Vehicle</option>
+                            <option value="vehicle_propulsion;vehicle">Type of Vehicle Propulsion</option>
+                            <option value="casualty_class;casualty">Class of Casualty</option>
+                            <option value="gender;casualty">Gender of Casualty</option>
+                            <option value="age_band_driver;casualty">Age Band of Casualty</option>
+                            <option value="casualty_severity;casualty">Severity of Casualty</option>
+                            <option value="car_passenger;casualty">Car Passenger</option>
+                            <option value="bus_passenger;casualty">Bus Passenger</option>
+                            <option value="ped_road_maint_worker;casualty">Road Maintainence Worker</option>
+                            <option value="casualty_type;casualty">Type of Casualty</option>
+                            <option value="home_area_type;casualty">Type of Home Area of Casualty</option>
+                            <option value="accident_severity;accident">Severity of Accident</option>
+                            <option value="road_type;accident">Type of Road</option>
+                            <option value="junction_detail;accident">Type of Junction</option>
+                            <option value="junction_control;accident">Control at Junction</option>
+                            <option value="light_conditions;accident">Light Conditions</option>
+                            <option value="weather_conditions;accident">Weather Conditions</option>
+                            <option value="road_surface_conditions;accident">Condition of Road Surface</option>
+                            <option value="special_conditions;accident">Special Conditions</option>
+                            <option value="carriageway_hazards;accident">Carriageway Hazards</option>
+                            <option value="urbal_or_rural;accident">Urban or Rural</option>
+                            <option value="police_at_scene;accident">Did Police arrive at the scene</option>
+                            <option value="day_of_week;accident">Day of the Week</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="vis_type">How to Visualise</label>
+                        <select class="form-control" id="vis_type" name="vis_type">
+                            <option value="bar">Bar</option>
+                            <option value="horizontalBar">Horizontal Bar</option>
+                            <option value="line">Line</option>
+                            <option value="pie">Pie</option>
+                            <option value="doughnut">Donut</option>
+                            <option value="polarArea">Polar Area</option>
+                            <option value="radar">Radar</option>
+                            <option value="map" onclick="hidedata()">Map</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                         <label for="year">Show Years</label>
+                         <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="all" id="year" name="year" onclick="eventCheckBox()">
+                            <label class="form-check-label" for="all">
+                                All
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="2016" id="year" name="year">
+                            <label class="form-check-label" for="2016">
+                                2016
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="2017" id="year" name="year">
+                            <label class="form-check-label" for="2017">
+                                2017
+                            </label>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script>
+        function eventCheckBox() {
+            let checkboxs = document.getElementsByTagName("input");
+            for(let i = 1; i < checkboxs.length ; i++) {
+                checkboxs[i].checked = !checkboxs[i].checked;
+            }
+            checkboxs[0].checked = false;
+        }
+        function hidedata(){
+            var data = document.getElementById("data_column");
+            data.style.display = !data.style.display;
+        }
+    </script>
+</body>
+</html>

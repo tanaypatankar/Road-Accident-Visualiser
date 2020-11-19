@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css">
+    {{!-- Chart.js stuff --}}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+
+    {{!-- OpenStreetMaps and Leaflet Stuff --}}
+    <link rel="stylesheet" type="text/css" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+    <link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/0.4.0/MarkerCluster.css" />
+    <link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/0.4.0/MarkerCluster.Default.css" />
+
+    <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js'></script>
+    <script type='text/javascript' src='http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js'></script>
+    <script type='text/javascript' src='http://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/0.4.0/leaflet.markercluster.js'></script>
+    
+    <title>Document</title>
+    {{!-- {{data}} --}}
+</head>
+<body >
+    <h1>Hererer</h1>
+    <div class="container mt-4" style="background-color: aliceblue;">
+        <div id="map" style="width: 100%; height: 500px; border: 1px solid rgb(0, 0, 0);"></div>
+        <canvas id="myChart"></canvas>
+        
+    </div>
+    
+    {{!-- <script src="main.js"></script> --}}
+    <script>
+
+        function toList0(obj) {
+            return obj[Object.keys(obj)[0]];
+        }
+        function toList1(obj) {
+            return obj[Object.keys(obj)[1]];
+        }
+        function toList2(obj) {
+            return obj[Object.keys(obj)[2]];
+        }
+        function seperatebyyears(year){
+            return records.filter(rec => rec.year == year);
+        }
+        function generatedatasets(yeararray, index){
+            return {
+                    label: yeararray[0].year,
+                    data: yearsmap[index].map(toList2),
+                    backgroundColor: chartcol[index % 6],
+                hoverBorderWidth: 3,
+                hoverBorderColor: '#000'
+                };
+        }
+        const chartcol = ['rgba(54, 162, 235, 0.7)', //blue
+                            'rgba(255, 99, 132, 0.7)', //pinkk
+                            'rgba(255, 206, 86, 0.7)', //yellow
+                            'rgba(75, 192, 192, 0.7)', //light blue
+                            'rgba(153, 102, 255, 0.7)', //purple
+                            'rgba(255, 159, 64, 0.7)']; //orange
+
+        var records = JSON.parse('{{{data}}}');
+        var charttype = '{{{chart}}}';
+        var chartlabel = '{{{label}}}';
+        var years = JSON.parse('{{{year}}}');
+        //console.log(records.map(toList0));
+        //console.log(records.map(toList1));
+        if (charttype == 'map'){
+            var chart = document.getElementById("myChart");
+            chart.style.display = "none";
+            // See post: http://asmaloney.com/2015/06/code/clustering-markers-on-leaflet-maps
+            {{!-- console.log('true'); --}}
+            var map = L.map( 'map', {
+            center: [55.5, -5.0  ],
+            minZoom: 2,
+            zoom: 5
+            });
+
+            L.tileLayer( 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+            subdomains: ['a','b','c']
+            }).addTo( map );
+
+            var myIcon = L.icon({
+            iconUrl: '/maps/images/pin24.png',
+            iconRetinaUrl: '/maps/images/pin48.png',
+            iconSize: [29, 24],
+            iconAnchor: [9, 21],
+            popupAnchor: [0, -14]
+            });
+
+            var markerClusters = L.markerClusterGroup();
+            
+            for ( var i = 0; i < records.length; ++i )
+            {
+            var popup = '<b>Time of Accident:</b><br/>' + records[i].time;
+
+            var m = L.marker( [records[i].lat, records[i].lng], {icon: myIcon} )
+                            .bindPopup( popup );
+
+            markerClusters.addLayer( m );
+            }
+
+            map.addLayer( markerClusters );
+
+        }else {
+            var map_div = document.getElementById("map");
+            map_div.style.display = "none";
+
+            if(years[0] == 'all'){
+            var chartdatasets = [{label: chartlabel,
+                            data: records.map(toList1),
+                            backgroundColor: chartcol[0],
+                            hoverBorderWidth: 3,
+                            hoverBorderColor: '#000'
+                }]
+                console.log(chartdatasets);
+            }
+            else{
+                var yearsmap = years.map(seperatebyyears);
+                var chartdatasets = yearsmap.map(generatedatasets);
+            }
+            console.log(yearsmap);
+            console.log(records);
+            let myChart = document.getElementById('myChart').getContext('2d');
+
+            // Global options
+
+            Chart.defaults.global.defaultFontFamily = 'Lato';
+            Chart.defaults.global.defaultFontSize = 20;
+            Chart.defaults.scale.ticks.min = 0;
+
+            let genChart = new Chart(myChart, {
+                type: charttype,
+                data: {
+                    labels: [...new Set(records.map(toList0))],
+                    datasets: chartdatasets,//years.map(seperatebyyears).map(generatedatasets),
+                    /*[{
+                        label: chartlabel,
+                        data: records.map(toList1),
+                        backgroundColor: [
+                        'rgba(54, 162, 235, 0.7)', //blue
+                        'rgba(255, 99, 132, 0.7)', //pinkk
+                        'rgba(255, 206, 86, 0.7)', //yellow
+                        'rgba(75, 192, 192, 0.7)', //light blue
+                        'rgba(153, 102, 255, 0.7)', //purple
+                        'rgba(255, 159, 64, 0.7)', //orange
+                        'rgba(255, 99, 132, 0.7)',
+                        'rgba(54, 162, 235, 0.7)',
+                        'rgba(255, 206, 86, 0.7)',
+                        'rgba(75, 192, 192, 0.7)',
+                        'rgba(153, 102, 255, 0.7)',
+                        'rgba(255, 159, 64, 0.7)',
+                        'rgba(255, 99, 132, 0.7)',
+                        'rgba(54, 162, 235, 0.7)',
+                        'rgba(255, 206, 86, 0.7)',
+                        'rgba(75, 192, 192, 0.7)',
+                        'rgba(153, 102, 255, 0.7)',
+                        'rgba(255, 159, 64, 0.7)'],
+                    hoverBorderWidth: 3,
+                    hoverBorderColor: '#000'
+                    }],*/
+                },
+                options: {
+                    title: {
+                        display: true,
+                        text: 'Title here',
+
+                    },
+                    legend: {
+                        position: 'right',
+                    }
+                }
+            });
+        }
+        
+    </script>
+</body>
+</html>
