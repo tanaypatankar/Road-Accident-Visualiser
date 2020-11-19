@@ -2,10 +2,10 @@ const mysql = require("mysql");
 
 
 const db = mysql.createConnection({
-    host: process.env.DATABASE_HOST,
-    user: process.env.DATABASE_USER,
-    password: process.env.DATABASE_PASSWORD,
-    database: process.env.DATABASE
+    host: process.env.NEW_DATABASE_HOST,
+    user: process.env.NEW_DATABASE_USER,
+    password: process.env.NEW_DATABASE_PASSWORD,
+    database: process.env.NEW_DATABASE
 });
 
 exports.create = (req, res) => {

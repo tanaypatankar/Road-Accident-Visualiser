@@ -3,8 +3,7 @@ const path = require("path");
 const mysql = require("mysql");
 const dotenv = require("dotenv");
 const bodyparser = require('body-parser');
-
-
+let cors = require('cors')
 
 // Set env path
 dotenv.config({path: './.env'});
@@ -16,20 +15,22 @@ app.use(bodyparser.json());
 
 // Database parameters
 const db = mysql.createConnection({
-    host: process.env.DATABASE_HOST,
-    user: process.env.DATABASE_USER,
-    password: process.env.DATABASE_PASSWORD,
-    database: process.env.DATABASE
+    host: process.env.NEW_DATABASE_HOST,
+    user: process.env.NEW_DATABASE_USER,
+    password: process.env.NEW_DATABASE_PASSWORD,
+    database: process.env.NEW_DATABASE
 });
+
 
 // Loation of local css and what not files
 const publicDirectory = path.join(__dirname, './public');
 app.use(express.static(publicDirectory));
 
 // Parse forms to json
-app.use(express.urlencoded({extended: false}));
+app.use(express.urlencoded({extended: true}));
 
 app.set('view engine', 'hbs');
+app.use(cors())
 
 // connect to database
 db.connect((err) => {
@@ -44,7 +45,7 @@ db.connect((err) => {
 // '/' directory of express
 app.use('/', require('./routes/pages'));
 app.use('/auth', require('./routes/auth'));
-
+app.use('/users', require('./routes/users'))
 
 // Start express on port 5000
 app.listen(5000, () => {
