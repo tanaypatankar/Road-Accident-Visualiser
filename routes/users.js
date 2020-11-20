@@ -57,10 +57,11 @@ async function login(req,res){
       if(results.length  >0){
         const comparision = await bcrypt.compare(password, results[0].password)
         if(comparision){
-            res.send({
-              'code':200,
-              'success': 'Login sucessful'
-            })
+          res.render('user_home')
+            // res.send({
+            //   'code':200,
+            //   'success': 'Login sucessful'
+            // })
         }
         else{
           res.send({
