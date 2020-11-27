@@ -44,7 +44,7 @@ db.connect((err) => {
 
 // '/' directory of express
 app.use('/', require('./routes/pages'));
-app.use('/auth', require('./routes/auth'));
+app.use('/vis', require('./routes/vis'));
 app.use('/users', require('./routes/users'))
 
 // Start express on port 5000
