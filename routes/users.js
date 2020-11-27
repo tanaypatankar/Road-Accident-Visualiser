@@ -47,6 +47,7 @@ async function register(req,res){
 async function login(req,res){
   var email= req.body.email;
   var password = req.body.password;
+  console.log(email);
   db.query('SELECT * FROM users WHERE email = ?;',[email], async function (error, results, fields) {
     if (error) {
       res.send({
