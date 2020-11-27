@@ -1,7 +1,14 @@
 const mysql = require("mysql");
 
 
-const db = mysql.createConnection({
+// const db = mysql.createConnection({
+//     host: process.env.NEW_DATABASE_HOST,
+//     user: process.env.NEW_DATABASE_USER,
+//     password: process.env.NEW_DATABASE_PASSWORD,
+//     database: process.env.NEW_DATABASE
+// });
+const db  = mysql.createPool({
+    connectionLimit : 1,
     host: process.env.NEW_DATABASE_HOST,
     user: process.env.NEW_DATABASE_USER,
     password: process.env.NEW_DATABASE_PASSWORD,

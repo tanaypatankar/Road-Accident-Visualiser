@@ -4,21 +4,29 @@ const saltRounds = 10;
 const express = require('express');
 const router = express.Router();
 //route to handle user registration
-const db = mysql.createConnection({
+
+// const db = mysql.createConnection({
+//   host: process.env.NEW_DATABASE_HOST,
+//   user: process.env.NEW_DATABASE_USER,
+//   password: process.env.NEW_DATABASE_PASSWORD,
+//   database: process.env.NEW_DATABASE
+// });
+const db  = mysql.createPool({
+  connectionLimit : 1,
   host: process.env.NEW_DATABASE_HOST,
   user: process.env.NEW_DATABASE_USER,
   password: process.env.NEW_DATABASE_PASSWORD,
   database: process.env.NEW_DATABASE
 });
 
-db.connect(function(err) {
-  if (err) {
-    console.error('An error occurred while connecting to the MySQL db:\n' + err.stack);
-    return;
-  }
+// db.connect(function(err) {
+//   if (err) {
+//     console.error('An error occurred while connecting to the MySQL db:\n' + err.stack);
+//     return;
+//   }
 
-  console.log('connected as id ' + db.threadId);
-});
+//   console.log('connected as id ' + db.threadId);
+// });
 
 async function register(req,res){
   const password = req.body.password;
