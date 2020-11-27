@@ -4,7 +4,10 @@ const mysql = require("mysql");
 const dotenv = require("dotenv");
 const bodyparser = require('body-parser');
 let cors = require('cors')
+var hbs = require('hbs');
 
+// hbs.registerPartial('partial', fs.readFileSync(__dirname + '/views/partial.hbs', 'utf8'));
+hbs.registerPartials(__dirname + '/views/partials');
 // Set env path
 dotenv.config({path: './.env'});
 
