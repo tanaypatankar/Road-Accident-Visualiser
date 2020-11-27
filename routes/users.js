@@ -3,14 +3,6 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const express = require('express');
 const router = express.Router();
-//route to handle user registration
-
-// const db = mysql.createConnection({
-//   host: process.env.NEW_DATABASE_HOST,
-//   user: process.env.NEW_DATABASE_USER,
-//   password: process.env.NEW_DATABASE_PASSWORD,
-//   database: process.env.NEW_DATABASE
-// });
 const db  = mysql.createPool({
   connectionLimit : 1,
   host: process.env.NEW_DATABASE_HOST,
@@ -19,16 +11,8 @@ const db  = mysql.createPool({
   database: process.env.NEW_DATABASE
 });
 
-// db.connect(function(err) {
-//   if (err) {
-//     console.error('An error occurred while connecting to the MySQL db:\n' + err.stack);
-//     return;
-//   }
-
-//   console.log('connected as id ' + db.threadId);
-// });
-
-async function register(req,res){
+async function register(req,res)
+{
   const password = req.body.password;
   const encryptedPassword = await bcrypt.hash(password, saltRounds)
 
@@ -42,7 +26,8 @@ async function register(req,res){
        console.log(error);
      }
      else{
-       if(results.length != 0){
+       if(results.length != 0)
+       {
         res.send({
           'code':204,
           'failed':'User already exists:\n'
@@ -50,16 +35,17 @@ async function register(req,res){
        }
        else{
         db.query('INSERT INTO users SET ?',users, function (error, results, fields) {
-          if (error) {
+          if (error) 
+          {
             res.send({
               'code':400,
               'failed':'An error occurred while connecting to the MySQL db:\n' + error.stack
             })
-          }else {
-            res.send({
-              'code':200,
-              'success' : 'User registration successful'
-            });
+          }
+          else
+          {
+            module.exports.user = users.email;
+            res.render('user_home', {email: users.email});
           }
         });
        }
@@ -69,7 +55,8 @@ async function register(req,res){
   
 }
 
-async function login(req,res){
+async function login(req,res)
+{
   var email= req.body.email;
   var password = req.body.password;
   console.log(email);
@@ -79,16 +66,15 @@ async function login(req,res){
         'code':400,
         'failed': 'An error occurred while connecting to the MySQL db:\n' + error.stack
       })
-    }else{
+    }
+    else
+    {
       if(results.length  >0){
         console.log(results);
         const comparision = await bcrypt.compare(password, results[0].password)
         if(comparision){
-          res.render('user_home')
-            // res.send({
-            //   'code':200,
-            //   'success': 'Login sucessful'
-            // })
+          module.exports.user = email;
+          res.render('user_home', {email: email});
         }
         else{
           res.send({
@@ -104,9 +90,8 @@ async function login(req,res){
             });
       }
     }
-    });
-  }
-
+  });
+}
 router.post('/register', register);
 router.post('/login', login);
 module.exports = router;

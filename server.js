@@ -5,6 +5,7 @@ const dotenv = require("dotenv");
 const bodyparser = require('body-parser');
 let cors = require('cors')
 var hbs = require('hbs');
+const { extname } = require("path");
 
 // hbs.registerPartial('partial', fs.readFileSync(__dirname + '/views/partial.hbs', 'utf8'));
 hbs.registerPartials(__dirname + '/views/partials');
@@ -16,22 +17,6 @@ const app = express();
 
 app.use(bodyparser.json());
 
-// Database parameters
-// const db = mysql.createConnection({
-//     host: process.env.NEW_DATABASE_HOST,
-//     user: process.env.NEW_DATABASE_USER,
-//     password: process.env.NEW_DATABASE_PASSWORD,
-//     database: process.env.NEW_DATABASE
-// });
-const db  = mysql.createPool({
-    connectionLimit : 1,
-    host: process.env.NEW_DATABASE_HOST,
-    user: process.env.NEW_DATABASE_USER,
-    password: process.env.NEW_DATABASE_PASSWORD,
-    database: process.env.NEW_DATABASE
-});
-
-
 // Loation of local css and what not files
 const publicDirectory = path.join(__dirname, './public');
 app.use(express.static(publicDirectory));
@@ -42,20 +27,18 @@ app.use(express.urlencoded({extended: true}));
 app.set('view engine', 'hbs');
 app.use(cors())
 
-// connect to database
-// db.connect((err) => {
-//     if(err){
-//         console.log(err);
-//     }
-//     else{
-//         console.log("MySQL connected.")
-//     }
-// })
-
-// '/' directory of express
 app.use('/', require('./routes/pages'));
 app.use('/vis', require('./routes/vis'));
 app.use('/users', require('./routes/users'))
+const router = express.Router();
+
+// '/' directory of express
+router.get('/', (req,res) => {
+    res.render('index.hbs')
+} );
+
+module.exports = router;
+
 
 // Start express on port 5000
 app.listen(5000, () => {

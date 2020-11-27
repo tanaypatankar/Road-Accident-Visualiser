@@ -2,33 +2,16 @@
 <html lang="en">
 {{> header}}
 <body>
-{{> navbar}}
-    {{!-- <div class="container">
-        <div class="card blue-grey darken-1">
-             <span class="card-title">
-                Login
-            </span>
-             <div class="card-body">
-                 <form action="/users/login" method="post">
-                    <div class="collection-item">
-                        <label for="email">Email address</label>
-                        <input type="email" class="form-control" id="email" name="email">
-                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                    </div>
-                    <div class="collection-item">
-                        <label for="password">Password</label>
-                        <input type="password" class="form-control" id="password" name="password">
-                    </div class="card-action">
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                 </form>
-             </div>
-        </div>
-    </div> --}}
-
+  {{> navbar}}
     <div class="container row">
-        <div class="col s4"></div>
+        <div class="col s4">
+           
+        </div>
         <div class="col s4 z-depth-1 grey lighten-4 row" style="display: inline-block; padding: 32px 48px 40px 48px; border: 1px solid #EEE;">
-
+        <div class="row">
+             <p>
+                Login - pick up where you left off.
+            </p>
           <form class="col s12" action="/users/login" method="post" style="padding-top: 40px;">
             <div class='row'>
               <div class='col s12'>
@@ -56,6 +39,7 @@
               </div>
             </center>
           </form>
+        </div>
         <div class="col s4"></div>
 
         </div>
