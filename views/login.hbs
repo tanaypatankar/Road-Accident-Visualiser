@@ -1,34 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-    <link rel="stylesheet" href="/style.css">
-    <title>Road Accident Visualiser</title>
-</head>
+{{> header}}
 <body>
-    <div class="container mt-4">
-        <div class="card">
-             <div class="card-header">
+{{> navbar}}
+    {{!-- <div class="container">
+        <div class="card blue-grey darken-1">
+             <span class="card-title">
                 Login
-            </div>
+            </span>
              <div class="card-body">
                  <form action="/users/login" method="post">
-                    <div class="form-group">
+                    <div class="collection-item">
                         <label for="email">Email address</label>
                         <input type="email" class="form-control" id="email" name="email">
                         <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                     </div>
-                    <div class="form-group">
+                    <div class="collection-item">
                         <label for="password">Password</label>
                         <input type="password" class="form-control" id="password" name="password">
-                    </div>
+                    </div class="card-action">
                     <button type="submit" class="btn btn-primary">Submit</button>
                  </form>
              </div>
         </div>
-    </div>
+    </div> --}}
+
+    <div class="container row">
+        <div class="col s4"></div>
+        <div class="col s4 z-depth-1 grey lighten-4 row" style="display: inline-block; padding: 32px 48px 40px 48px; border: 1px solid #EEE;">
+
+          <form class="col s12" action="/users/login" method="post" style="padding-top: 40px;">
+            <div class='row'>
+              <div class='col s12'>
+              </div>
+            </div>
+
+            <div class='row'>
+              <div class='input-field col s12'>
+                <input class='validate' type='email' name='email' id='email' />
+                <label for='email'>Enter your email</label>
+              </div>
+            </div>
+
+            <div class='row'>
+              <div class='input-field col s12'>
+                <label for='password'>Password</label>
+                <input class='validate' type='password' name='password' id='password' />
+              </div>
+            </div>
+
+            <br />
+            <center>
+              <div class='row'>
+                <button type='submit' name='btn_login' class='col s12 btn btn-large waves-effect indigo'>Login</button>
+              </div>
+            </center>
+          </form>
+        <div class="col s4"></div>
+
+        </div>
+        
     
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.1/jquery.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
 </body>
 </html>
