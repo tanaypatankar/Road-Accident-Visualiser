@@ -52,7 +52,7 @@ exports.create = (req, res) =>
     {
         console.log(JSON.parse(JSON.stringify(rows)));
         // module.exports = {data: JSON.parse(JSON.stringify(rows)), chart: vis_type};
-        res.render('chart', {data: (JSON.stringify(rows)), chart: vis_type, label: criteria[0], year: (JSON.stringify(year)) });
+        res.render('chart', {data: (JSON.stringify(rows)), chart: vis_type, label: criteria[0], year: (JSON.stringify(year)), email: email});
     }
     else
         console.log(err);

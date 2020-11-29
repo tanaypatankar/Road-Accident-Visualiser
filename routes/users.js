@@ -12,7 +12,7 @@ const db  = mysql.createPool({
 });
 
 var list = [{name: "harshad"}, {name: "harshad"}, {name: "harshad"}, {name: "tanay"}];
-var globemail = undefined;
+// var globemail = undefined;
 async function register(req,res)
 {
   const password = req.body.password;
@@ -81,7 +81,7 @@ async function login(req,res)
         if(comparision){
           exports.email = email;
           // console.log(exports)
-          globemail = email;
+          // globemail = email;
           res.render('user_home', {email: email, list: list});
         }
         else{
