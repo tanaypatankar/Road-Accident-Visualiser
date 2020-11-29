@@ -1,4 +1,5 @@
 const mysql = require("mysql");
+const user = require("../routes/users");
 
 const db  = mysql.createPool({
     connectionLimit : 1,
@@ -8,35 +9,46 @@ const db  = mysql.createPool({
     database: process.env.NEW_DATABASE
 });
 
-exports.create = (req, res) => {
-
+exports.create = (req, res) => 
+{
+    console.log("This is the username");
+    console.log(user.email);
+    console.log("username ends");
     var {data_column, vis_type, year} = req.body;
     console.log((year));
     const criteria = data_column.split(';');
     var query="";
-    if(vis_type == 'map'){
-        if(typeof(year) == 'string'){
+    
+    if(vis_type == 'map')
+    {
+        if(typeof(year) == 'string')
+        {
             query = 'select latitude as lat, longitude as lng, accident_time as time from accident where accident_index like \'' + year +'%\' and latitude IS NOT NULL;'
             year = [year];
         }
-        else {
+        else 
+        {
             res.render('index');
         }
     }
-    else if (year == undefined){
+    else if (year == undefined)
+    {
         query = 'select b.' + criteria[0] + '_label, count(*) as count from ' + criteria[1] + ' as a,' + criteria[0] + ' as b where a.' + criteria[0] + '_id = b.' + criteria[0] + '_id group by a.' + criteria[0] + '_id;';
         year = ['all'];
     }
-    else{
+    else
+    {
         query = 'select b.' + criteria[0] + '_label, substring(a.accident_index, 1, 4) as year, count(*) as count from ' + criteria[1] + ' as a,' + criteria[0] + ' as b where a.' + criteria[0] + '_id = b.' + criteria[0] + '_id group by a.' + criteria[0] + '_id, substring(a.accident_index, 1, 4);';
-        if(typeof(year) == 'string'){
+        if(typeof(year) == 'string')
+        {
             year = [year];
         }
     }
     console.log(query);
     //const query = 'select b.' + criteria[0] + '_label, count(*) as count from ' + criteria[1] + ' as a,' + criteria[0] + ' as b where a.' + criteria[0] + '_id = b.' + criteria[0] + '_id group by a.' + criteria[0] + '_id;'
     db.query(query, (err, rows, fields) => {
-    if (!err){
+    if (!err)
+    {
         console.log(JSON.parse(JSON.stringify(rows)));
         // module.exports = {data: JSON.parse(JSON.stringify(rows)), chart: vis_type};
         res.render('chart', {data: (JSON.stringify(rows)), chart: vis_type, label: criteria[0], year: (JSON.stringify(year)) });

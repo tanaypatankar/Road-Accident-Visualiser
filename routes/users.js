@@ -11,6 +11,7 @@ const db  = mysql.createPool({
   database: process.env.NEW_DATABASE
 });
 
+var list = [{name: "harshad"}, {name: "harshad"}, {name: "harshad"}, {name: "tanay"}];
 async function register(req,res)
 {
   const password = req.body.password;
@@ -44,8 +45,8 @@ async function register(req,res)
           }
           else
           {
-            module.exports.user = users.email;
-            res.render('user_home', {email: users.email});
+            exports.email = users.email;
+            res.render('user_home', {email: users.email, list: list});
           }
         });
        }
@@ -69,12 +70,12 @@ async function login(req,res)
     }
     else
     {
-      if(results.length  >0){
+      if(results.length > 0){
         console.log(results);
-        const comparision = await bcrypt.compare(password, results[0].password)
+        const comparision = await bcrypt.compare(password, results[0].pwd)
         if(comparision){
-          module.exports.user = email;
-          res.render('user_home', {email: email});
+          exports.email = email;
+          res.render('user_home', {email: email, list: list});
         }
         else{
           res.send({
