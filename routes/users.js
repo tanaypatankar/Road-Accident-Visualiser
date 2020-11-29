@@ -19,7 +19,7 @@ async function register(req,res)
 
   var users={
      'email': req.body.email,
-     'password': encryptedPassword
+     'pwd': encryptedPassword
    }
 
    db.query('SELECT * FROM users WHERE email = ?;',[users.email], async function (error, results, fields) {
