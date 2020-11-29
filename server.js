@@ -7,7 +7,6 @@ let cors = require('cors')
 var hbs = require('hbs');
 const { extname } = require("path");
 
-// hbs.registerPartial('partial', fs.readFileSync(__dirname + '/views/partial.hbs', 'utf8'));
 hbs.registerPartials(__dirname + '/views/partials');
 // Set env path
 dotenv.config({path: './.env'});
@@ -28,7 +27,6 @@ app.set('view engine', 'hbs');
 app.use(cors())
 
 app.use('/', require('./routes/pages'));
-app.use('/users', require('./routes/users'))
 app.use('/vis', require('./routes/vis'));
 
 // Start express on port 5000

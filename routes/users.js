@@ -1,8 +1,6 @@
 var mysql = require('mysql');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
-const express = require('express');
-// const router = express.Router();
 const db  = mysql.createPool({
   connectionLimit : 1,
   host: process.env.NEW_DATABASE_HOST,
@@ -96,6 +94,9 @@ async function login(req,res)
     }
   });
 }
-// router.post('/register', register);
-// router.post('/login', login);
-// module.exports = router;
+
+exports.login = login;
+exports.register = register;
+
+
+

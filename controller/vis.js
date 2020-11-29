@@ -1,5 +1,5 @@
 const mysql = require("mysql");
-var user = require("../routes/users");
+const user = require("../routes/users.js");
 
 const db  = mysql.createPool({
     connectionLimit : 1,
@@ -11,11 +11,9 @@ const db  = mysql.createPool({
 
 exports.create = (req, res) => 
 {
-    console.log("This is the username in controllers");
-    console.log(user.email);
-    console.log("username ends");
+    var email = user.email;
     var {data_column, vis_type, year} = req.body;
-    console.log((year));
+    console.log((req.body));
     const criteria = data_column.split(';');
     var query="";
     
@@ -51,7 +49,7 @@ exports.create = (req, res) =>
     {
         console.log(JSON.parse(JSON.stringify(rows)));
         // module.exports = {data: JSON.parse(JSON.stringify(rows)), chart: vis_type};
-        res.render('chart', {data: (JSON.stringify(rows)), chart: vis_type, label: criteria[0], year: (JSON.stringify(year)), email: user.email });
+        res.render('chart', {data: (JSON.stringify(rows)), chart: vis_type, label: criteria[0], year: (JSON.stringify(year)), email: email});
     }
     else
         console.log(err);

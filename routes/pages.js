@@ -1,4 +1,4 @@
-var user = require('./users');
+const user = require('./users');
 const express = require('express');
 const router = express.Router();
 console.log("This is the username in pages");
@@ -14,6 +14,9 @@ router.get('/login', (req,res) => {
 router.get('/register', (req,res) => {
     res.render('register.hbs')
 } );
-router.post('/register', user.register);
-router.post('/login', user.login);
+
+router.post('/submitregister', user.register);
+
+router.post('/submitlogin', user.login);
+
 module.exports = router;
