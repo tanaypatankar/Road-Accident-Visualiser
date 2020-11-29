@@ -20,7 +20,7 @@
     {{!-- {{data}} --}}
 </head>
 <body >
-    {{> logged_in_navbar}}
+    {{> logged_in_navbar email = email}}
     <div class="container mt-4" style="background-color: aliceblue;">
         <div id="map" style="width: 100%; height: 500px; border: 1px solid rgb(0, 0, 0);"></div>
         <canvas id="myChart"></canvas>
@@ -36,15 +36,19 @@
         function toList0(obj) {
             return obj[Object.keys(obj)[0]];
         }
+
         function toList1(obj) {
             return obj[Object.keys(obj)[1]];
         }
+
         function toList2(obj) {
             return obj[Object.keys(obj)[2]];
         }
+
         function seperatebyyears(year){
             return records.filter(rec => rec.year == year);
         }
+        
         function generatedatasets(yeararray, index){
             return {
                     label: yeararray[0].year,

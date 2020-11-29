@@ -28,17 +28,8 @@ app.set('view engine', 'hbs');
 app.use(cors())
 
 app.use('/', require('./routes/pages'));
-app.use('/vis', require('./routes/vis'));
 app.use('/users', require('./routes/users'))
-const router = express.Router();
-
-// '/' directory of express
-router.get('/', (req,res) => {
-    res.render('index.hbs')
-} );
-
-module.exports = router;
-
+app.use('/vis', require('./routes/vis'));
 
 // Start express on port 5000
 app.listen(5000, () => {

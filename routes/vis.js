@@ -1,9 +1,9 @@
 const express = require('express');
 const visController = require('../controller/vis');
 const router = express.Router();
-const user = require("../routes/users");
-console.log("This is the username");
-console.log(user.email);
+var user = require("../routes/users");
+console.log("This is the username in vis");
+console.log(user);
 console.log("username ends");
 
 // '/' directory of express
