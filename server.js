@@ -7,7 +7,6 @@ let cors = require('cors')
 var hbs = require('hbs');
 const { extname } = require("path");
 
-// hbs.registerPartial('partial', fs.readFileSync(__dirname + '/views/partial.hbs', 'utf8'));
 hbs.registerPartials(__dirname + '/views/partials');
 // Set env path
 dotenv.config({path: './.env'});
@@ -29,16 +28,6 @@ app.use(cors())
 
 app.use('/', require('./routes/pages'));
 app.use('/vis', require('./routes/vis'));
-// app.use('/users', require('./routes/users'))
-const router = express.Router();
-
-// '/' directory of express
-router.get('/', (req,res) => {
-    res.render('index.hbs')
-} );
-
-module.exports = router;
-
 
 // Start express on port 5000
 app.listen(5000, () => {

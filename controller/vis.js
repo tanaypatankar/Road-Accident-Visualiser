@@ -11,12 +11,9 @@ const db  = mysql.createPool({
 
 exports.create = (req, res) => 
 {
-    console.log("This is the username");
-    console.log(user.email);
     var email = user.email;
-    console.log("username ends");
     var {data_column, vis_type, year} = req.body;
-    console.log((year));
+    console.log((req.body));
     const criteria = data_column.split(';');
     var query="";
     
