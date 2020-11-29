@@ -1,4 +1,4 @@
-let user = require('./users');
+const user = require('./users');
 const express = require('express');
 const router = express.Router();
 router.get('/', (req,res) => {
@@ -14,5 +14,9 @@ router.get('/register', (req,res) => {
 router.get('/visselection', (req,res) => {
     res.render('visselection.hbs', {email: user})
 } );
+
+router.post('/submitregister', user.register);
+
+router.post('/submitlogin', user.login);
 
 module.exports = router;

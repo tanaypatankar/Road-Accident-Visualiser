@@ -1,8 +1,8 @@
 var mysql = require('mysql');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
-const express = require('express');
-const router = express.Router();
+// const express = require('express');
+// const router = express.Router();
 const db  = mysql.createPool({
   connectionLimit : 1,
   host: process.env.NEW_DATABASE_HOST,
@@ -12,6 +12,7 @@ const db  = mysql.createPool({
 });
 
 var list = [{name: "harshad"}, {name: "harshad"}, {name: "harshad"}, {name: "tanay"}];
+var globemail = undefined;
 async function register(req,res)
 {
   const password = req.body.password;
@@ -56,6 +57,10 @@ async function register(req,res)
   
 }
 
+// 
+// var email = undefined;
+// 
+
 async function login(req,res)
 {
   var email= req.body.email;
@@ -75,6 +80,8 @@ async function login(req,res)
         const comparision = await bcrypt.compare(password, results[0].pwd)
         if(comparision){
           exports.email = email;
+          // console.log(exports)
+          globemail = email;
           res.render('user_home', {email: email, list: list});
         }
         else{
@@ -93,6 +100,14 @@ async function login(req,res)
     }
   });
 }
-router.post('/register', register);
-router.post('/login', login);
-module.exports = router;
+
+
+// router.post('/register', register);
+// router.post('/login', login);
+// module.exports = router;
+
+exports.login = login;
+exports.register = register;
+
+
+

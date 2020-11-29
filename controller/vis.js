@@ -1,5 +1,5 @@
 const mysql = require("mysql");
-const user = require("../routes/users");
+const user = require("../routes/users.js");
 
 const db  = mysql.createPool({
     connectionLimit : 1,
@@ -13,6 +13,7 @@ exports.create = (req, res) =>
 {
     console.log("This is the username");
     console.log(user.email);
+    var email = user.email;
     console.log("username ends");
     var {data_column, vis_type, year} = req.body;
     console.log((year));

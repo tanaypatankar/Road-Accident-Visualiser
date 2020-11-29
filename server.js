@@ -29,7 +29,7 @@ app.use(cors())
 
 app.use('/', require('./routes/pages'));
 app.use('/vis', require('./routes/vis'));
-app.use('/users', require('./routes/users'))
+// app.use('/users', require('./routes/users'))
 const router = express.Router();
 
 // '/' directory of express
