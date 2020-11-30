@@ -29,9 +29,25 @@
     <div class="container mt-4">
         <button id="savevisbutton" class="btn btn-primary">Save Visualisation (need to pass user primary key here so that we can insert into saved vis table)</button>
     </div>
+    <div class="container mt-4">
+        <button id="dwnldimg" class="btn btn-primary" onclick="dwnldimg()">Download Visualisation</button>
+    </div>
     
     {{!-- <script src="main.js"></script> --}}
     <script>
+
+        function dwnldimg(){
+            const mycanvas = document.querySelector("#myChart");
+            const a = document.createElement("a");
+            document.body.appendChild(a);
+            const dataURL = mycanvas.toDataURL(); //This needs to be stored and retieved and do the foll while showing in list
+                                                   // const img = document.createElement('img');
+                                                   // img.src = dataUrl
+            a.href = dataURL;
+            a.download = "saved_vis.png";
+            a.click();
+            document.body.removeChild(a);
+        }
 
         function toList0(obj) {
             return obj[Object.keys(obj)[0]];
