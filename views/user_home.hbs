@@ -113,20 +113,24 @@
         <div class="row">
         {{#each list}}
           <div class="col s6">
-            <h2 class="header">{{this.name}}</h2>
+            {{!-- <h2 class="header">{{this.name}}</h2> --}}
               <div class="card horizontal">
                 <div class="card-stacked">
                   <div class="card-content">
-                    <p>Years: 2019, 2018.</p>
-                    <p>Type: Bar</p>
-                    <p>Metric: Age Band</p>
+                    <p>Years: {{this.years}}</p>
+                    <p>Type: {{this.type_of_graph}}</p>
+                    <p>Metric: {{this.data_to_vis}}</p>
                   </div>
                 <div class="card-action">
-                  <div class="col s11">
-                    <a href="#"><b style="color:indigo">Open Visualisation</b></a>
+                  <div class="col s9">
+                    <form action = "/open/{{saved_id}}" method = "post">
+                      <button id="openvisbutton" name="openvisbutton" class="btn btn-primary" style="background-color: indigo;">Open Visualisation</button>
+                    </form>
                   </div>
-                  <div class="col s1">
-                    <a href="#"><i class="material-icons left", style="color: indigo;">delete</i></a>
+                  <div class="col s3">
+                    <form action = "/delete/{{saved_id}}" method = "post">
+                      <button id="deletevisbutton" name="deletevisbutton" class="btn btn-primary" style="background-color: indigo;">Delete</button>
+                    </form>
                   </div>
                 </div>
                 </div>

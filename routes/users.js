@@ -9,7 +9,7 @@ const db  = mysql.createPool({
   database: process.env.NEW_DATABASE
 });
 
-var list = [{name: "harshad"}, {name: "harshad"}, {name: "harshad"}, {name: "tanay"}];
+// var list = [{name: "harshad"}, {name: "harshad"}, {name: "harshad"}, {name: "tanay"}];
 async function register(req,res)
 {
   const password = req.body.password;
@@ -62,6 +62,22 @@ async function login(req,res)
   var password = req.body.password;
   console.log(email);
   console.log(password);
+
+  // To be copied wherever saved list is to be passed - START
+  var list;
+  db.query('SELECT * FROM saved WHERE user_email = ?;', [email],async function (error, rows, fields){
+    if(error){
+        console.log(error);
+    }
+    else{
+        // return rows;
+        list = JSON.parse(JSON.stringify(rows));
+        // console.log(list);
+    }
+  })
+  // To be copied wherever saved list is to be passed - END
+
+
   db.query('SELECT * FROM users WHERE email = ?;',[email], async function (error, results, fields) {
     if (error) {
       res.send({
@@ -77,6 +93,7 @@ async function login(req,res)
         if(comparision){
           exports.email = email;
           console.log("This is the username in users:", exports.email);
+          console.log(list);
           res.render('user_home', {email: email, list: list});
         }
         else{
@@ -98,6 +115,3 @@ async function login(req,res)
 
 exports.login = login;
 exports.register = register;
-
-
-

@@ -21,17 +21,6 @@
 </head>
 <body >
     {{> logged_in_navbar email = email}}
-    <div class="row" style="padding-top:40px; padding-bottom:40px">
-        <div class="col s8"></div>
-        <div class="col s2">
-            <button id="dwnldimg" class="btn btn-primary" onclick="dwnldimg()">Download Visualisation</button>
-        </div>
-        <div class="col s2">
-            <form action = "/save" method = "post">
-            <button id="savevisbutton" name="savevisbutton" class="btn btn-primary" style="background-color: indigo;" value='{{{body}}}'>SAVE VISUALISATION</button>
-            <form>
-        </div>
-    </div>
     <div class="container" style="background-color: aliceblue;">
         <div id="map" style="width: 100%; height: 500px; border: 1px solid rgb(0, 0, 0);"></div>
         <canvas id="myChart"></canvas>
@@ -39,19 +28,6 @@
     </div>
     
     <script>
-
-        function dwnldimg(){
-            const mycanvas = document.querySelector("#myChart");
-            const a = document.createElement("a");
-            document.body.appendChild(a);
-            const dataURL = mycanvas.toDataURL(); //This needs to be stored and retieved and do the foll while showing in list
-                                                   // const img = document.createElement('img');
-                                                   // img.src = dataUrl
-            a.href = dataURL;
-            a.download = "saved_vis.png";
-            a.click();
-            document.body.removeChild(a);
-        }
 
         function toList0(obj) 
         {
@@ -99,9 +75,7 @@
         if (charttype == 'map')
         {
             var chart = document.getElementById("myChart");
-            var chartdwnldbtn = document.getElementById("dwnldimg");
             chart.style.display = "none";
-            chartdwnldbtn.style.display = "none";
             // See post: http://asmaloney.com/2015/06/code/clustering-markers-on-leaflet-maps
             
             var map = L.map( 'map', {
