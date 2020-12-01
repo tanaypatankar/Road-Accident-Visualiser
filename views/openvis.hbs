@@ -21,13 +21,31 @@
 </head>
 <body >
     {{> logged_in_navbar email = email}}
+    <div class="row" style="padding-top:40px; padding-bottom:40px">
+        <div class="col s10"></div>
+        <div class="col s2">
+            <button id="dwnldimg" class="btn btn-primary" onclick="dwnldimg()">Download Visualisation</button>
+        </div>
+    </div>
     <div class="container" style="background-color: aliceblue;">
         <div id="map" style="width: 100%; height: 500px; border: 1px solid rgb(0, 0, 0);"></div>
         <canvas id="myChart"></canvas>
-        
     </div>
     
     <script>
+
+        function dwnldimg(){
+            const mycanvas = document.querySelector("#myChart");
+            const a = document.createElement("a");
+            document.body.appendChild(a);
+            const dataURL = mycanvas.toDataURL(); //This needs to be stored and retieved and do the foll while showing in list
+                                                   // const img = document.createElement('img');
+                                                   // img.src = dataUrl
+            a.href = dataURL;
+            a.download = "saved_vis.png";
+            a.click();
+            document.body.removeChild(a);
+        }
 
         function toList0(obj) 
         {
