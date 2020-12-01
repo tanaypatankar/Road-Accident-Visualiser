@@ -59,6 +59,7 @@ async function login(req,res)
   var email= req.body.email;
   var password = req.body.password;
   console.log(email);
+  console.log(password);
   db.query('SELECT * FROM users WHERE email = ?;',[email], async function (error, results, fields) {
     if (error) {
       res.send({
@@ -70,7 +71,7 @@ async function login(req,res)
     {
       if(results.length > 0){
         console.log(results);
-        const comparision = await bcrypt.compare(password, results[0].pwd)
+        const comparision = await bcrypt.compare(password, results[0].password)
         if(comparision){
           exports.email = email;
           res.render('user_home', {email: email, list: list});
