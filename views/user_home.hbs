@@ -140,11 +140,10 @@
     function eventCheckBox() 
     {
       let checkboxs = document.getElementsByTagName("input");
-      for(let i = 1; i < checkboxs.length ; i++) 
+      for(let i = 0; i < checkboxs.length ; i++) 
       {
-        checkboxs[i].checked = !checkboxs[i].checked;
+        checkboxs[i].checked = !checkboxs[0].checked;
       }
-      checkboxs[0].checked = false;
     }
     function hidedata()
     {

@@ -1,6 +1,7 @@
 const mysql = require("mysql");
 const user = require("../routes/users.js");
 
+
 const db  = mysql.createPool({
     connectionLimit : 1,
     host: process.env.NEW_DATABASE_HOST,
@@ -12,6 +13,8 @@ const db  = mysql.createPool({
 exports.create = (req, res) => 
 {
     var email = user.email;
+    console.log("this is vis.js");
+    console.log(email);
     var {data_column, vis_type, year} = req.body;
     console.log((req.body));
     const criteria = data_column.split(';');
@@ -47,9 +50,9 @@ exports.create = (req, res) =>
     db.query(query, (err, rows, fields) => {
     if (!err)
     {
-        console.log(JSON.parse(JSON.stringify(rows)));
+        // console.log(JSON.parse(JSON.stringify(rows)));
         // module.exports = {data: JSON.parse(JSON.stringify(rows)), chart: vis_type};
-        res.render('chart', {data: (JSON.stringify(rows)), chart: vis_type, label: criteria[0], year: (JSON.stringify(year)), email: email});
+        res.render('chart', {data: (JSON.stringify(rows)), chart: vis_type, label: criteria[0], year: (JSON.stringify(year)), email: email, body: JSON.stringify(req.body)});
     }
     else
         console.log(err);

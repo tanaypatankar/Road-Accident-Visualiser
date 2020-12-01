@@ -73,7 +73,7 @@ async function login(req,res)
     {
       if(results.length > 0){
         console.log(results);
-        const comparision = await bcrypt.compare(password, results[0].password)
+        const comparision = await bcrypt.compare(password, results[0].pwd)
         if(comparision){
           exports.email = email;
           console.log("This is the username in users:", exports.email);

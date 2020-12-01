@@ -21,34 +21,44 @@
 </head>
 <body >
     {{> logged_in_navbar email = email}}
-    <div class="container mt-4" style="background-color: aliceblue;">
+    <div class="row" style="padding-top:40px; padding-bottom:40px">
+        <div class="col s10"></div>
+        <div class="col s2">
+            <form action = "/save" method = "post">
+            <button id="savevisbutton" name="savevisbutton" class="btn btn-primary" style="background-color: indigo;" value='{{{body}}}'>SAVE VISUALISATION</button>
+            <form>
+        </div>
+    </div>
+    <div class="container" style="background-color: aliceblue;">
         <div id="map" style="width: 100%; height: 500px; border: 1px solid rgb(0, 0, 0);"></div>
         <canvas id="myChart"></canvas>
         
     </div>
-    <div class="container mt-4">
-        <button id="savevisbutton" class="btn btn-primary">Save Visualisation (need to pass user primary key here so that we can insert into saved vis table)</button>
-    </div>
     
     <script>
 
-        function toList0(obj) {
+        function toList0(obj) 
+        {
             return obj[Object.keys(obj)[0]];
         }
 
-        function toList1(obj) {
+        function toList1(obj)
+        {
             return obj[Object.keys(obj)[1]];
         }
 
-        function toList2(obj) {
+        function toList2(obj) 
+        {
             return obj[Object.keys(obj)[2]];
         }
 
-        function seperatebyyears(year){
+        function seperatebyyears(year)
+        {
             return records.filter(rec => rec.year == year);
         }
         
-        function generatedatasets(yeararray, index){
+        function generatedatasets(yeararray, index)
+        {
             return {
                     label: yeararray[0].year,
                     data: yearsmap[index].map(toList2),
@@ -57,6 +67,7 @@
                 hoverBorderColor: '#000'
                 };
         }
+
         const chartcol = ['rgba(54, 162, 235, 0.7)', //blue
                             'rgba(255, 99, 132, 0.7)', //pinkk
                             'rgba(255, 206, 86, 0.7)', //yellow
@@ -68,9 +79,9 @@
         var charttype = '{{{chart}}}';
         var chartlabel = '{{{label}}}';
         var years = JSON.parse('{{{year}}}');
-        //console.log(records.map(toList0));
-        //console.log(records.map(toList1));
-        if (charttype == 'map'){
+
+        if (charttype == 'map')
+        {
             var chart = document.getElementById("myChart");
             chart.style.display = "none";
             // See post: http://asmaloney.com/2015/06/code/clustering-markers-on-leaflet-maps
@@ -108,7 +119,10 @@
 
             map.addLayer( markerClusters );
 
-        }else {
+        }
+
+        else 
+        {
             var map_div = document.getElementById("map");
             map_div.style.display = "none";
 
@@ -121,12 +135,15 @@
                 }]
                 console.log(chartdatasets);
             }
-            else{
+            else
+            {
                 var yearsmap = years.map(seperatebyyears);
                 var chartdatasets = yearsmap.map(generatedatasets);
             }
-            console.log(yearsmap);
-            console.log(records);
+
+            // console.log(yearsmap);
+            // console.log(records);
+
             let myChart = document.getElementById('myChart').getContext('2d');
 
             // Global options
@@ -140,31 +157,6 @@
                 data: {
                     labels: [...new Set(records.map(toList0))],
                     datasets: chartdatasets,//years.map(seperatebyyears).map(generatedatasets),
-                    /*[{
-                        label: chartlabel,
-                        data: records.map(toList1),
-                        backgroundColor: [
-                        'rgba(54, 162, 235, 0.7)', //blue
-                        'rgba(255, 99, 132, 0.7)', //pinkk
-                        'rgba(255, 206, 86, 0.7)', //yellow
-                        'rgba(75, 192, 192, 0.7)', //light blue
-                        'rgba(153, 102, 255, 0.7)', //purple
-                        'rgba(255, 159, 64, 0.7)', //orange
-                        'rgba(255, 99, 132, 0.7)',
-                        'rgba(54, 162, 235, 0.7)',
-                        'rgba(255, 206, 86, 0.7)',
-                        'rgba(75, 192, 192, 0.7)',
-                        'rgba(153, 102, 255, 0.7)',
-                        'rgba(255, 159, 64, 0.7)',
-                        'rgba(255, 99, 132, 0.7)',
-                        'rgba(54, 162, 235, 0.7)',
-                        'rgba(255, 206, 86, 0.7)',
-                        'rgba(75, 192, 192, 0.7)',
-                        'rgba(153, 102, 255, 0.7)',
-                        'rgba(255, 159, 64, 0.7)'],
-                    hoverBorderWidth: 3,
-                    hoverBorderColor: '#000'
-                    }],*/
                 },
                 options: {
                     title: {
@@ -178,7 +170,9 @@
                 }
             });
         }
-        
     </script>
+    <script type="text/javascript" src="../routes/saved.js"></script>
+  <script type = "text/javascript" src = "https://code.jquery.com/jquery-2.1.1.min.js"></script>           
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
 </body>
 </html>

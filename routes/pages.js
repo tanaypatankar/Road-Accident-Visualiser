@@ -1,5 +1,6 @@
 const user = require('./users');
 const express = require('express');
+const saved = require('./saved');
 const router = express.Router();
 console.log("This is the username in pages");
 console.log(user.email);
@@ -16,7 +17,7 @@ router.get('/register', (req,res) => {
 } );
 
 router.post('/submitregister', user.register);
-
+router.post('/save', saved.save);
 router.post('/submitlogin', user.login);
 
 module.exports = router;
