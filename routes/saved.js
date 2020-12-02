@@ -161,6 +161,47 @@ function deletevis(req, res){
     })
 }
 
+function updatevis(req, res){
+    db.query('SELECT * FROM saved WHERE saved_id = ?;', [req.params.data], function (error, rows, fields){
+        if(error){
+            console.log(error);
+        }
+        else{
+            var email = user.email;
+            console.log(req.body);
+            var body = req.body;
+            var saved_data =
+            {
+                'data_to_vis': body.data_column,
+                'years': (JSON.stringify(body.year) == undefined) ? 'all' : JSON.stringify(body.year),
+                'type_of_graph': body.vis_type,
+                'user_email': email
+            }
+            console.log(saved_data);
+            db.query('UPDATE saved SET data_to_vis = ?, years = ?, type_of_graph = ? WHERE saved_id = ?;', [saved_data.data_to_vis, saved_data.years, saved_data.type_of_graph, req.params.data], function (error, rows, fields){
+                if(error){
+                    console.log(error);
+                }
+                else{
+                    db.query('SELECT * FROM saved WHERE user_email = ?;', [user.email], function (error, rows, fields){
+                        var list;
+                        if(error){
+                            console.log(error);
+                        }
+                        else{
+                            // console.log(rows);
+                            var list = JSON.parse(JSON.stringify(rows));
+                            // console.log(list);
+                        }
+                        res.render('user_home',  {email: user.email, list: list});
+                    })
+                }
+            })
+        }
+    })
+}
+
 exports.save = savevis;
 exports.open = opensavedvis;
 exports.delete = deletevis;
+exports.update = updatevis;

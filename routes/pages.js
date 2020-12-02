@@ -22,6 +22,7 @@ router.post('/submitregister', user.register);
 router.post('/save', saved.save);
 router.post('/open/:data', saved.open);
 router.post('/delete/:data', saved.delete);
+router.post('/update/:data', saved.update);
 router.post('/submitlogin', user.login);
 
 module.exports = router;

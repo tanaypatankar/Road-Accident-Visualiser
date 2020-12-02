@@ -1,0 +1,91 @@
+<div class="modal-content">
+<h4>Choose the configuration</h4>
+    <div class="input-field">
+        <select class="form-control" id="data_column" name="data_column">
+            <option value="" disabled selected>Data to visualise</option>
+            <option value="age_band_driver;vehicle">Age Band of Driver</option>
+            <option value="skidding;vehicle">Skidding</option>
+            <option value="gender;vehicle">Gender of driver</option>
+            <option value="home_area_type;vehicle">Type of Home Area of Driver</option>
+            <option value="hit_object;vehicle">Hit Object</option>
+            <option value="journey_purpose;vehicle">Purpose of the Journey</option>
+            <option value="vehicle_type;vehicle">Type of Vehicle</option>
+            <option value="vehicle_manoeuvre;vehicle">Vehicle Manoeuvre</option>
+            <option value="vehicle_location;vehicle">Location of Vehicle</option>
+            <option value="junction_location;vehicle">Location of Junction</option>
+            <option value="point_of_impact;vehicle">Point of Impact</option>
+            <option value="left_hand_drive;vehicle">Left Hand Drive Vehicle</option>
+            <option value="vehicle_propulsion;vehicle">Type of Vehicle Propulsion</option>
+            <option value="casualty_class;casualty">Class of Casualty</option>
+            <option value="gender;casualty">Gender of Casualty</option>
+            <option value="age_band_driver;casualty">Age Band of Casualty</option>
+            <option value="casualty_severity;casualty">Severity of Casualty</option>
+            <option value="car_passenger;casualty">Car Passenger</option>
+            <option value="bus_passenger;casualty">Bus Passenger</option>
+            <option value="ped_road_maint_worker;casualty">Road Maintainence Worker</option>
+            <option value="casualty_type;casualty">Type of Casualty</option>
+            <option value="home_area_type;casualty">Type of Home Area of Casualty</option>
+            <option value="accident_severity;accident">Severity of Accident</option>
+            <option value="road_type;accident">Type of Road</option>
+            <option value="junction_detail;accident">Type of Junction</option>
+            <option value="junction_control;accident">Control at Junction</option>
+            <option value="light_conditions;accident">Light Conditions</option>
+            <option value="weather_conditions;accident">Weather Conditions</option>
+            <option value="road_surface_conditions;accident">Condition of Road Surface</option>
+            <option value="special_conditions;accident">Special Conditions</option>
+            <option value="carriageway_hazards;accident">Carriageway Hazards</option>
+            <option value="urbal_or_rural;accident">Urban or Rural</option>
+            <option value="police_at_scene;accident">Did Police arrive at the scene</option>
+            <option value="day_of_week;accident">Day of the Week</option>
+        </select>
+    </div>
+    <div class="input-field">
+        <select class="form-control" id="vis_type" name="vis_type">
+            <option value="" disabled selected>Type of graph</option>
+            <option value="bar">Bar</option>
+            <option value="horizontalBar">Horizontal Bar</option>
+            <option value="line">Line</option>
+            <option value="pie">Pie</option>
+            <option value="doughnut">Donut</option>
+            <option value="polarArea">Polar Area</option>
+            <option value="radar">Radar</option>
+            <option value="map" onclick="hidedata()">Map</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="year">Show Years</label>
+        {{!-- <div>
+            <label>
+            <input type="checkbox" type="checkbox" value="all" id="year" name="year" onclick="eventCheckBox()"/>
+            <span>All years</span>
+            </label>
+        </div> --}}
+        <div>
+            <label>
+            <input type="checkbox" type="checkbox" value="2016" id="2016" name="year" />
+            <span>2016</span>
+            </label>
+        </div>
+        <div>
+            <label>
+            <input type="checkbox" type="checkbox" value="2017" id="2017" name="year" />
+            <span>2017</span>
+            </label>
+        </div>
+        <div>
+            <label>
+            <input type="checkbox" type="checkbox" value="2018" id="2018" name="year" />
+            <span>2018</span>
+            </label>
+        </div>
+        <div>
+            <label>
+            <input type="checkbox" type="checkbox" value="2019" id="2019" name="year" />
+            <span>2019</span>
+            </label>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="submit" class="btn btn-primary indigo">{{btnsubmit}}</button>
+</div>
