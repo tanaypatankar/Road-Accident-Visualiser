@@ -93,7 +93,9 @@
         if (charttype == 'map')
         {
             var chart = document.getElementById("myChart");
+            var chartdwnldbtn = document.getElementById("dwnldimg");
             chart.style.display = "none";
+            chartdwnldbtn.style.display = "none";
             // See post: http://asmaloney.com/2015/06/code/clustering-markers-on-leaflet-maps
             
             var map = L.map( 'map', {
