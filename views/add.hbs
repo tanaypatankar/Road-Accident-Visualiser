@@ -1,0 +1,239 @@
+<--ADD ACCIDENT VALUES -->
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>INSERTION FORM</title>
+  <meta name="description" content="INSERTION FORM">
+  <meta name="author" content="SitePoint">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+
+  <link rel="stylesheet" href='./styling.css'>
+
+</head>
+
+<body>
+  <nav>
+    <h4> INSERTION FORM </h4>
+    <ul>
+      <li> <a href="/"> BACK HOME </a></li>
+      <li> <a href="/add"> ADD ENTRIES </a></li>
+    </ul>
+  </nav>
+
+  <div class="container mt-4">
+    <div class="card" style="width: 36rem;">
+        <div class="card-header">
+            <h2> <b> ADD VALUES TO THE DATABASE (ADMINISTRATOR ACCESS) </b></h2>
+        </div>
+        <div class="card-body">
+            
+            <form action="/auth/add" method="POST">
+                
+                <hr> <b> ACCIDENT INFORMATION </b> <hr> 
+                <div class="dropdown"> SELECT YEAR: <br>
+                    <select class="btn btn-secondary dropdown-toggle" type="button" id="year_id" name="year_id" data-toggle="dropdown">
+                        <option value='2020' > 2020  </option>
+                        <option value='2019' > 2019 </option>
+                        <option value='2018' > 2018 </option>
+                        <option value='2017' > 2017 </option>
+                        <option value='2026' > 2016 </option>
+                    </select>
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="longitude">Longitude: </label>
+                    <input type="text" class="form-control" id="longitude" name="longitude">
+                </div>
+                <div class="form-group">
+                    <label for="latitude">Latitude: </label>
+                    <input type="text" class="form-control" id="latitude" name="latitude">
+                </div>
+
+                <div class="dropdown"> SELECT ACCIDENT SEVERITY: <br>
+                    <select class="btn btn-secondary dropdown-toggle" type="button" id="accident_severity_id" name="accident_severity_id" data-toggle="dropdown">
+                        <option value='1' > MINOR  </option>
+                        <option value='2' > MAJOR INJURIES </option>
+                        <option value='3' > CASUALTIES OBSERVED</option>
+                    </select>
+                </div>
+                <br>
+
+                <div class="form-group">
+                    <label for="num_vehicles">Number of Vehicles Involved: </label>
+                    <input type="text" class="form-control" id="num_vehicles" name="num_vehicles">
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="num_casualty">Number of Casualties observed (if any): </label>
+                    <input type="text" class="form-control" id="num_casualty" name="num_casualty">
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="accident_date">Date of the Accident: </label>
+                    <input type="text" class="form-control" id="accident_date" name="accident_date">
+                </div>
+                <br>
+
+                <div class="dropdown"> SELECT DAY: <br>
+                    <select class="btn btn-secondary dropdown-toggle" type="button" id="day_of_week_id" name="day_of_week_id" data-toggle="dropdown">
+                        <option value='1' > SUNDAY  </option>
+                        <option value='2' > MONDAY </option>
+                        <option value='3' > TUESDAY </option>
+                        <option value='4' > WEDNESDAY</option>
+                        <option value='5' > THURSDAY </option>
+                        <option value='6' > FRIDAY </option>
+                        <option value='7' > SATURDAY </option>
+                    </select>
+                </div>
+                <br>
+
+                <div class="form-group">
+                    <label for="accident_time">Time of the Accident: </label>
+                    <input type="text" class="form-control" id="accident_time" name="accident_time">
+                </div>
+                <br>
+
+                <div class="dropdown"> SELECT ROAD TYPE: <br>
+                    <select class="btn btn-secondary dropdown-toggle" type="button" id="road_type_id" name="road_type_id" data-toggle="dropdown">
+                        <option value='1' > ROUNDABOUT  </option>
+                        <option value='2' > ONE WAY STREET </option>
+                        <option value='3' > DUAL CARRIAGE </option>
+                        <option value='6' > SINGLE CARRIAGWAY </option>
+                        <option value='7' > SLIP ROAD </option>
+                        <option value='8' > UNKNOWN </option>
+                    </select>
+                </div>
+                <br>
+
+                <div class="form-group">
+                    <label for="speed_limit"> Speed Limit: </label>
+                    <input type="text" class="form-control" id="speed_limit" name="speed_limit">
+                </div><br>
+
+                <div class="dropdown"> JUNCTION DETAIL: <br>
+                    <select class="btn btn-secondary dropdown-toggle" type="button" id="junction_detail_id" name="junction_detail_id" data-toggle="dropdown">
+                        <option value='-1' > MISSING  </option>
+                        <option value='0' > NOT AT JUNCTION OR 20M WITHIN  </option>
+                        <option value='1' > ROUNDABOUT </option>
+                        <option value='2' > MINI ROUNDABOUT </option>
+                        <option value='3' > T-SHAPED JUNCTION / STAGGERED </option>
+                        <option value='5' > SLIP ROAD </option>
+                        <option value='6' > CROSS ROADS </option>
+                        <option value='7' > MORE THAN 4 ARMS </option>
+                        <option value='8' > PRIVATE AREA </option>
+                        <option value='9' > OTHER JUNCTION </option>
+                    </select>
+                </div><br>
+
+                <div class="dropdown"> JUNCTION CONTROL: <br>
+                    <select class="btn btn-secondary dropdown-toggle" type="button" id="junction_control_id" name="junction_control_id" data-toggle="dropdown">
+                        <option value='-1' > MISSING  </option>
+                        <option value='0' > NOT AT JUNCTION OR 20M WITHIN  </option>
+                        <option value='1' > AUTHORISED PERSON  </option>
+                        <option value='2' > AUTO TRAFFIC SIGNAL </option>
+                        <option value='3' > STOP SIGN </option>
+                        <option value='4' > GIVEWAY/UNCONTROLLED </option>
+                    </select>
+                </div><br>
+
+                <div class="dropdown"> LIGHT CONDITIONS: <br>
+                    <select class="btn btn-secondary dropdown-toggle" type="button" id="light_conditions_id" name="light_conditions_id" data-toggle="dropdown">
+                        <option value='-1' > MISSING  </option>
+                        <option value='1' > DAYLIGHT </option>
+                        <option value='4' > DARKNESS WITH LIGHTS LIT </option>
+                        <option value='5' > DARKNESS WITH LIGHTS NOT LIT</option>
+                        <option value='6' > DARKNESS WITH NO LIGHTS</option>
+                        <option value='7' > DARKNESS WITH NO INFO</option>
+                    </select>
+                </div><br>
+
+                <div class="dropdown"> Weather Conditions: <br>
+                    <select class="btn btn-secondary dropdown-toggle" type="button" id="weather_conditions_id" name="weather_conditions_id" data-toggle="dropdown">
+                        <option value='-1' > MISSING  </option>
+                        <option value='1' > FINE WITH NO HIGH WINDS </option>
+                        <option value='2' > RAIN WITH NO HIGH WINDS </option>
+                        <option value='3' > SNOWY WITH NO HIGH WINDS </option>
+                        <option value='4' > FINE WITH HIGH WINDS </option>
+                        <option value='5' > RAIN WITH HIGH WINDS </option>
+                        <option value='6' > SNOWY WITH HIGH WINDS </option>
+                        <option value='7' > FOGGY OR MISTY </option>
+                        <option value='8' > OTHER </option>
+                    </select>
+                </div><br>
+
+                <div class="dropdown"> Road Conditions <br>
+                    <select class="btn btn-secondary dropdown-toggle" type="button" id="road_surface_conditions_id" name="road_surface_conditions_id" data-toggle="dropdown">
+                        <option value='-1' > MISSING  </option>
+                        <option value='1' > DRY </option>
+                        <option value='2' > WET </option>
+                        <option value='3' > SNOW </option>
+                        <option value='4' > FROST </option>
+                        <option value='5' > FLOOD WITH 3CM HEIGHT </option>
+                        <option value='6' > OILY </option>
+                        <option value='7' > MUD </option>
+                    </select>
+                </div><br>
+
+                <div class="dropdown"> Special Conditions <br>
+                    <select class="btn btn-secondary dropdown-toggle" type="button" id="special_conditions_id" name="special_conditions_id" data-toggle="dropdown">
+                        <option value='0' > NONE </option>
+                        <option value='-1' > MISSING  </option>
+                        <option value='1' > AUTO SIGNAL OUT </option>
+                        <option value='2' > SIGNAL DEFECTIVE </option>
+                        <option value='3' > DEFECTIVE ROAD SIGN OR MARKING </option>
+                        <option value='4' > ROAD WORK IN PROGRESS </option>
+                        <option value='5' > DEFECTIVE SURFACE </option>
+                        <option value='6' > OILY </option>
+                        <option value='7' > MUD </option>
+                    </select>
+                </div><br>
+
+                <div class="dropdown"> Carriageway Hazards <br>
+                    <select class="btn btn-secondary dropdown-toggle" type="button" id="carriageway_hazards_id" name="carriageway_hazards_id" data-toggle="dropdown">
+                        <option value='0' > NONE </option>
+                        <option value='-1' > MISSING  </option>
+                        <option value='1' > VEHICLE LOAD ON ROAD </option>
+                        <option value='2' > OTHER OBJECT ON ROAD </option>
+                        <option value='3' > DOG ON ROAD </option>
+                        <option value='4' > OTHER ANIMAL ON ROAD </option>
+                        <option value='5' > PEDESTRIAN ON ROAD </option>
+                    </select>
+                </div><br>
+
+                <div class="dropdown"> Urban/Rural <br>
+                    <select class="btn btn-secondary dropdown-toggle" type="button" id="urbal_or_rural_id" name="urbal_or_rural_id" data-toggle="dropdown">
+                        <option value='1' > URBAN </option>
+                        <option value='2' > RURAL </option>
+                        <option value='3' > UNCLASSIFIED </option>
+                    </select>
+                </div><br>
+
+                <div class="dropdown"> Police at Scene? <br>
+                    <select class="btn btn-secondary dropdown-toggle" type="button" id="police_at_scene_id" name="police_at_scene_id" data-toggle="dropdown">
+                        <option value='1' > YES </option>
+                        <option value='2' > NO </option>
+                        <option value='3' > NO - ACCIDENT SELF COMPLAINT </option>
+                    </select>
+                </div><br><br>
+
+                <br><br>
+                <button type="submit" class="btn btn-primary">ADD ENTRIES</button><hr>
+
+            </form><br>
+        </div>
+    </div>
+
+    {{#if message }}
+        <h4 class="msg_not_found"> {{message}} </h4>
+    {{/if}}
+    
+  </div>
+  <script src="js/scripts.js"></script>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+
+</body>
+</html>

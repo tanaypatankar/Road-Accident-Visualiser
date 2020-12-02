@@ -1,0 +1,26 @@
+nav{
+    background-color: black;
+    color: whitesmoke;  
+    display: flex;
+    padding: 30px 50px; 
+}
+
+nav ul {
+    display: flex; 
+    justify-content: space-around; 
+    align-items: center;
+}
+
+nav li {
+    list-style: none; 
+}
+
+nav li a{
+    text-decoration: none; 
+    font-weight: bold; 
+    padding: 6px 12px; 
+}
+
+.dropdown{
+    position: relative;
+}
