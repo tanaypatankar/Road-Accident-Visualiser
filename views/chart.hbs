@@ -16,6 +16,7 @@
     <script type='text/javascript' src='http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js'></script>
     <script type='text/javascript' src='http://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/0.4.0/leaflet.markercluster.js'></script>
     
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js" integrity="sha512-01CJ9/g7e8cUmY0DFTMcUw/ikS799FHiOA0eyHsUWfOetgbx/t6oV4otQ5zXKQyIrQGTHSmRVPIgrgLcZi/WMA==" crossorigin="anonymous"></script>
     <title>Chart</title>
     {{!-- {{data}} --}}
 </head>
@@ -25,6 +26,9 @@
         <div class="col s8"></div>
         <div class="col s2">
             <button id="dwnldimg" class="btn btn-primary" onclick="dwnldimg()">Download Visualisation</button>
+        </div>
+        <div class="col s2">
+            <button id="dwnldmap" class="btn btn-primary" onclick="dwnldmap()">Download Map</button>
         </div>
         <div class="col s2">
             <form action = "/save" method = "post">
@@ -37,8 +41,26 @@
         <canvas id="myChart"></canvas>
         
     </div>
+
+    
     
     <script>
+
+        function dwnldmap() {
+            var node = document.getElementById('map');
+            const a = document.createElement("a");
+            document.body.appendChild(a);
+            domtoimage.toPng(node)
+            .then(function (dataUrl) {
+                a.href = dataUrl;
+                a.download = "saved_map.png";
+                a.click();
+                document.body.removeChild(a);
+            })
+            .catch(function (error) {
+                console.error('oops, something went wrong!', error);
+            });
+        }
 
         function dwnldimg(){
             const mycanvas = document.querySelector("#myChart");
@@ -138,11 +160,12 @@
             map.addLayer( markerClusters );
 
         }
-
         else 
         {
             var map_div = document.getElementById("map");
+            var dwnldmapbtn = document.getElementById("dwnldmap");
             map_div.style.display = "none";
+            dwnldmapbtn.style.display = "none";
 
             if(years[0] == 'all'){
             var chartdatasets = [{label: chartlabel,
