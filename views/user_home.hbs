@@ -18,7 +18,10 @@
         </div>
       <div class = "col s1"></div>
       </div>
+      <br>
       <div class="container">
+        <h4>Saved Visualisations</h4>
+        <hr>
         <div class="row">
         {{#each list}}
           <div class="col s6">
@@ -33,11 +36,11 @@
                 <div class="card-action">
                   <div class="col s4">
                     <form action = "/open/{{saved_id}}" method = "post">
-                      <button id="openvisbutton" name="openvisbutton" class="btn btn-primary" style="background-color: indigo;">Open</button>
+                      <button id="openvisbutton" name="openvisbutton" class="btn btn-primary" style="background-color: indigo;"><i class="material-icons left">launch</i>Open</button>
                     </form>
                   </div>
-                  <div class="col s5">
-                    <button id="visbutton" href="#vis-update-modal" class=" btn btn-primary modal-trigger" style="background-color:indigo;">Update</button>
+                  <div class="col s4">
+                    <button id="visbutton" href="#vis-update-modal" class=" btn btn-primary modal-trigger" style="background-color:indigo;"><i class="material-icons left">upgrade</i>Update</button>
                       {{!-- Modal Structure  --}}
                     <div id="vis-update-modal" class="modal">
                       <form action="/update/{{saved_id}}" method="POST">
@@ -45,9 +48,9 @@
                       </form>
                     </div>
                   </div>
-                  <div class="col s3">
+                  <div class="col s4">
                     <form action = "/delete/{{saved_id}}" method = "post">
-                      <button id="deletevisbutton" name="deletevisbutton" class="btn btn-primary" style="background-color: indigo;">Delete</button>
+                      <button id="deletevisbutton" name="deletevisbutton" class="btn btn-primary" style="background-color: indigo;"><i class="material-icons left">delete</i>Delete</button>
                     </form>
                   </div>
                 </div>
