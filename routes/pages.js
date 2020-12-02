@@ -25,4 +25,20 @@ router.post('/delete/:data', saved.delete);
 router.post('/update/:data', saved.update);
 router.post('/submitlogin', user.login);
 
+
+
+//FOR INSERTION FORM
+router.get('/idx', (req, res) => {
+    res.render('idx'); 
+});
+router.get('/add', (req, res) => {
+    res.render('add');
+});
+router.get('/add_casualties', (req, res) => {
+    res.render('add_casualties'); 
+});
+router.get('/add_vehicles', (req, res) => {
+    res.render('add_vehicles');
+});
+
 module.exports = router;

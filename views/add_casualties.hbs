@@ -1,0 +1,184 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>INSERTION FORM</title>
+  <meta name="description" content="INSERTION FORM">
+  <meta name="author" content="SitePoint">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+
+  <link rel="stylesheet" href='./styling.css'>
+
+</head>
+
+<body>
+  <nav>
+    <h4> FORM </h4>
+    <ul>
+      <li> <a href="/"> BACK HOME </a></li>
+      <li> <a href="/add"> ADD ENTRIES </a></li>
+    </ul>
+  </nav>
+
+  <div class="container mt-4">
+    <div class="card" style="width: 54rem;">
+        <div class="card-header">
+            <h2> <b> CASUALTY DATABASE (ADMINISTRATOR ACCESS) </b></h2>
+        </div>
+        <div class="card-body">
+            
+            <form action="/auth/add_casualties" method="POST">
+                
+                <hr> <b> GENERAL INFORMATION </b> <hr> 
+                <!--
+                <div class="form-group">
+                    <label for="accident_index">Accident Index: </label>
+                    <input type="text" class="form-control" id="accident_index" name="accident_index">
+                </div>
+                -->                
+
+                <div class="dropdown"> CASUALTY CLASS: <br>
+                    <select class="btn btn-secondary dropdown-toggle" type="button" id="casualty_class_id" name="casualty_class_id" data-toggle="dropdown">
+                        <option value='1' > DRIVER  </option>
+                        <option value='1' > RIDER</option>
+                        <option value='2' > PASSENGER </option>
+                        <option value='3' > PEDESTRIAN </option>
+                    </select>
+                </div><br>
+                <div class="dropdown"> GENDER: <br>
+                    <select class="btn btn-secondary dropdown-toggle" type="button" id="gender_id" name="gender_id" data-toggle="dropdown">
+                        <option value='1' > MALE  </option>
+                        <option value='2' > FEMALE</option>
+                        <option value='3' > UNKNOWN </option>
+                    </select>
+                </div><br>
+                <div class="form-group">
+                    <label for="age_casualty">Age: </label>
+                    <input type="text" class="form-control" id="age_casualty" name="age_casualty">
+                </div>
+                <div class="dropdown"> AGE BAND: <br>
+                    <select class="btn btn-secondary dropdown-toggle" type="button" id="age_band_driver_id" name="age_band_driver_id" data-toggle="dropdown">
+                        <option value='1' > 0-5  </option>
+                        <option value='2' > 6-10</option>
+                        <option value='3' > 11-15 </option>
+                        <option value='4' > 16-20</option>
+                        <option value='5' > 21-25 </option>
+                        <option value='6' > 26-35</option>
+                        <option value='7' > 36-45 </option>
+                        <option value='8' > 46-55</option>
+                        <option value='9' > 56-65 </option>
+                        <option value='10' > 66-75</option>
+                        <option value='11' > above 75 </option>
+                    </select>
+                </div><br>
+                <div class="dropdown"> CASUALTY SEVERITY: <br>
+                    <select class="btn btn-secondary dropdown-toggle" type="button" id="casualty_severity_id" name="casualty_severity_id" data-toggle="dropdown">
+                        <option value='1' > FATAL  </option>
+                        <option value='2' > SERIOUS</option>
+                        <option value='3' > MINOR </option>
+                    </select>
+                </div><br>
+                <div class="dropdown"> PEDESTRIAN LOCATION: <br>
+                    <select class="btn btn-secondary dropdown-toggle" type="button" id="ped_location_id" name="ped_location_id" data-toggle="dropdown">
+                        <option value='0' > NOT A PEDESTRIAN  </option>
+                        <option value='1' > Crossing on pedestrian crossing facility  </option>
+                        <option value='2' > Crossing in zig-zag approach lines  </option>
+                        <option value='3' > Crossing in zig-zag exit lines </option>
+                        <option value='4' > Crossing elsewhere within 50m. of pedestrian crossing</option>
+                        <option value='5' > In carriageway, crossing elsewhere  </option>
+                        <option value='6' > On footway or verge</option>
+                        <option value='7' > On refuge, central island or central reservation    </option>
+                        <option value='8' > In centre of carriageway - not on refuge, island or central reservation</option>
+                        <option value='9' > In carriageway, not crossing </option>
+                        <option value='10' > Unknown or other </option>
+                    </select>
+                </div><br>
+                <div class="dropdown"> PEDESTRIAN MOVEMENT: <br>
+                    <select class="btn btn-secondary dropdown-toggle" type="button" id="ped_movement_id" name="ped_movement_id" data-toggle="dropdown">
+                        <option value='0' > NOT A PEDESTRIAN  </option>
+                        <option value='1' > Crossing from driver's nearside  </option>
+                        <option value='2' > Crossing from nearside - masked by parked or stationary vehicle  </option>
+                        <option value='3' > Crossing from OFFside </option>
+                        <option value='4' > Crossing from offside - masked by  parked or stationary vehicle</option>
+                        <option value='5' > In carriageway, stationary - not crossing  (standing or playing)</option>
+                        <option value='6' > In carriageway, stationary - not crossing  (standing or playing) - masked by parked or stationary vehicle </option>
+                        <option value='7' > Walking along in carriageway, facing traffic</option>
+                        <option value='8' > Walking along in carriageway, back to traffic</option>
+                        <option value='9' > Unknown or other </option>
+                    </select>
+                </div><br>
+                <div class="dropdown"> CAR PASSENGER MOVEMENT: <br>
+                    <select class="btn btn-secondary dropdown-toggle" type="button" id="ped_location_id" name="car_passenger_id" data-toggle="car_passenger_id">
+                        <option value='0' > NOT A CAR PASSENGER  </option>
+                        <option value='1' > Front seat passenger   </option>
+                        <option value='2' > Rear seat passenger  </option>
+                    </select>
+                </div><br>
+                <div class="dropdown"> CAR PASSENGER MOVEMENT: <br>
+                    <select class="btn btn-secondary dropdown-toggle" type="button" id="bus_passenger_id" name="bus_passenger_id" data-toggle="dropdown">
+                        <option value='0' > NOT A BUS PASSENGER  </option>
+                        <option value='1' > Boarding   </option>
+                        <option value='2' > Alighting  </option>
+                        <option value='3' > Standing  </option>
+                        <option value='4' > Seated </option>
+                    </select>
+                </div><br>
+                <div class="dropdown"> ROAD MAINTENANCE WORKER: <br>
+                    <select class="btn btn-secondary dropdown-toggle" type="button" id="ped_road_maint_worker_id" name="ped_road_maint_worker_id" data-toggle="dropdown">
+                        <option value='0' > NO  </option>
+                        <option value='1' > YES </option>
+                        <option value='2' > UNKNOWN  </option>
+                    </select>
+                </div><br>
+                <div class="dropdown">WHO WAS THE CASUALTY: <br>
+                    <select class="btn btn-secondary dropdown-toggle" type="button" id="casualty_type_id" name="casualty_type_id" data-toggle="dropdown">
+                        <option value='0' > Pedestrian  </option>
+                        <option value='1' > Cyclist </option>
+                        <option value='2' > Motorcycle (less than 50cc) </option>
+                        <option value='3' > Motorcycle (less than 125cc) </option>
+                        <option value='4' > Motorcycle (less than 125-500cc)</option>
+                        <option value='5' > Motorcycle (more than 500cc) </option>
+                        <option value='8' > Taxi</option>
+                        <option value='9' > Car </option>
+                        <option value='10' > Minibus (8 - 16 passenger)</option>
+                        <option value='11' > Bus (16+ passengers) </option>
+                        <option value='16'> Horserider </option>
+                        <option value='17' > Agricultural Vehiclle</option>
+                        <option value='18' > Tram Occupant</option>
+                        <option value='19' > Van (Below 3.5 tonnne) </option>
+                        <option value='20' > Goods Carrier (3.5-7.5 tonnes) </option>
+                        <option value='21' > Goods Carrier (3.5+ tonnes) </option>
+                        <option value='22'> Mobility scooter rider</option>
+                        <option value='23' >Electric motorcycle rider </option>
+                        <option value='90' >Other vehicle occupant </option>
+                    </select>
+                </div><br>
+                <div class="dropdown"> ROAD MAINTENANCE WORKER: <br>
+                    <select class="btn btn-secondary dropdown-toggle" type="button" id="home_area_type_id" name="home_area_type_id" data-toggle="dropdown">
+                        <option value='3' > RURAL  </option>
+                        <option value='1' > URBAN </option>
+                        <option value='2' > SMALL TOWN  </option>
+                    </select>
+                </div><br>
+
+
+                <br><br>
+                <button type="submit" class="btn btn-primary">ADD ENTRIES</button><br>
+
+            </form><br>
+        </div>
+    </div>
+
+    {{#if message }}
+        <h4 class="msg_not_found"> {{message}} </h4>
+    {{/if}}
+    
+  </div>
+  <script src="js/scripts.js"></script>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+
+</body>
+</html>

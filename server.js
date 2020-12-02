@@ -1,6 +1,6 @@
 const express = require("express");
 const path = require("path");
-const mysql = require("mysql");
+//const mysql = require("mysql");
 const dotenv = require("dotenv");
 const bodyparser = require('body-parser');
 let cors = require('cors')
@@ -29,7 +29,13 @@ app.use(cors())
 app.use('/', require('./routes/pages'));
 app.use('/vis', require('./routes/vis'));
 
+//AUTHORIZE FORM
+const authController = require('./controllers/auth'); 
+app.post("/auth/add", authController.register);
+app.post("/auth/add_casualties", authController.add_casualties);
+app.post("/auth/add_vehicles", authController.add_vehicles);
+
 // Start express on port 5000
-app.listen(5000, () => {
-    console.log("Server started on port 5000");
+app.listen(5009, () => {
+    console.log("Server started on port 5009");
 });

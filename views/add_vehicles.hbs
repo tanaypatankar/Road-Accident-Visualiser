@@ -1,0 +1,260 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>INSERTION FORM</title>
+  <meta name="description" content="INSERTION FORM">
+  <meta name="author" content="SitePoint">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+
+  <link rel="stylesheet" href='./styling.css'>
+
+</head>
+
+<body>
+  <nav>
+    <h4> FORM </h4>
+    <ul>
+      <li> <a href="/"> BACK HOME </a></li>
+      <li> <a href="/add"> ADD ENTRIES </a></li>
+    </ul>
+  </nav>
+
+  <div class="container mt-4">
+    <div class="card" style="width: 54rem;">
+        <div class="card-header">
+            <h2> <b> VEHICLE DATABASE (ADMINISTRATOR ACCESS) </b></h2>
+        </div>
+        <div class="card-body">
+            
+            <form action="/auth/add_vehicles" method="POST">
+                
+                <hr> <b> VEHICLE INFORMATION </b> <hr> 
+                <!--
+                <div class="form-group">
+                    <label for="accident_index"> Enter Accident Index: </label>
+                    <input type="text" class="form-control" id="accident_index" name="accident_index">
+                </div>
+                -->
+                
+                <div class="dropdown"> VEHICLE TYPE: <br>
+                    <select class="btn btn-secondary dropdown-toggle" type="button" id="vehicle_type_id" name="vehicle_type_id" data-toggle="dropdown">
+                        <option value='0' > Pedestrian  </option>
+                        <option value='1' > Cyclist </option>
+                        <option value='2' > Motorcycle (less than 50cc) </option>
+                        <option value='3' > Motorcycle (less than 125cc) </option>
+                        <option value='4' > Motorcycle (less than 125-500cc)</option>
+                        <option value='5' > Motorcycle (more than 500cc) </option>
+                        <option value='8' > Taxi</option>
+                        <option value='9' > Car </option>
+                        <option value='10' > Minibus (8 - 16 passenger)</option>
+                        <option value='11' > Bus (16+ passengers) </option>
+                        <option value='16'> Horserider </option>
+                        <option value='17' > Agricultural Vehiclle</option>
+                        <option value='18' > Tram Occupant</option>
+                        <option value='19' > Van (Below 3.5 tonnne) </option>
+                        <option value='20' > Goods Carrier (3.5-7.5 tonnes) </option>
+                        <option value='21' > Goods Carrier (3.5+ tonnes) </option>
+                        <option value='22'> Mobility scooter rider</option>
+                        <option value='23' >Electric motorcycle rider </option>
+                        <option value='90' >Other vehicle occupant </option>
+                    </select>
+                </div><br>
+
+                <div class="dropdown"> TOWING: <br>
+                    <select class="btn btn-secondary dropdown-toggle" type="button" id="towing_id" name="towing_id" data-toggle="dropdown">
+                        <option value='0' > NONE  </option>
+                        <option value='1' > ARTICULATED VEHICLE </option>
+                        <option value='2' > MULTIPLE TRAILER</option>
+                        <option value='3' > CARAVAN  </option>
+                        <option value='4' > SINGLE TRAILER </option>
+                        <option value='5' > OTHER </option>
+                    </select>
+                </div><br>
+                
+                <div class="dropdown"> VEHICLE MANOUVRE: <br>
+                    <select class="btn btn-secondary dropdown-toggle" type="button" id="vehicle_manoeuvre_id" name="vehicle_manoeuvre_id" data-toggle="dropdown">
+                        <option value='1' > REVERSING </option>
+                        <option value='2' > PARKED  </option>
+                        <option value='3' > WAITING TO GO </option>
+                        <option value='4' > SLOWING/STOPPING  </option>
+                        <option value='5' > MOVING OFF </option>
+                        <option value='6' > U-TURN  </option>
+                        <option value='7' > TURNING LEFT </option>
+                        <option value='8' > WANTING TO TURN LEFT  </option>
+                        <option value='9' > TURNING RIGHT </option>
+                        <option value='10'> WANTING TO TURN RIGHT </option>
+                        <option value='11' >CHANGING TO LEFT LANE </option>
+                        <option value='12' >CHANGING TO RIGHT LANE  </option>
+                        <option value='13' >OVERTAKING MOVING VEHICLE</option>
+                        <option value='14' >OVERTAKING STATIC VEHICLE</option>
+                        <option value='15' >OVERTAKING NEARSIDE </option>
+                        <option value='16'> GOING AHEAD LEFT HAND BEND</option>
+                        <option value='17'> GOING AHEAD RIGHT HAND BEND</option>
+                        <option value='18'> GOING AHEAD OTHER</option>
+                    </select>
+                </div><br>
+
+                <div class="dropdown"> VEHICLE TYPE: <br>
+                    <select class="btn btn-secondary dropdown-toggle" type="button" id="vehicle_location_id" name="vehicle_location_id" data-toggle="dropdown">
+                        <option value='0' > On main carriageway - not in restricted  </option>
+                        <option value='1' > Tram/Light rail track </option>
+                        <option value='2' > Buslane </option>
+                        <option value='3' > Busway </option>
+                        <option value='4' > Cycle Lane </option>
+                        <option value='5' > Cycle Way </option>
+                        <option value='6' > On lay-by or hard shoulder </option>
+                        <option value='7' > Entering lay-by or hard shoulder </option>
+                        <option value='8' > Leaving lay-by or hard shoulder </option>
+                        <option value='9' > Pavement </option>
+                        <option value='10' >Not on carriageway</option>
+                     </select>
+                </div>
+                <div class="dropdown"> JUNCTION DETAIL: <br>
+                    <select class="btn btn-secondary dropdown-toggle" type="button" id="junction_location_id" name="junction_location_id" data-toggle="dropdown">
+                        <option value='-1' > MISSING  </option>
+                        <option value='0' > NOT AT JUNCTION OR 20M WITHIN  </option>
+                        <option value='1' > APPROACHING JUNCTION </option>
+                        <option value='2' > Cleared junction or waiting/parked at  </option>
+                        <option value='3' > Leaving Roundabout </option>
+                        <option value='4' > Enter Roundabout </option>
+                        <option value='5' > Leaving Main Road </option>
+                        <option value='6' > Entering Main Road </option>
+                        <option value='7' > Entering from Slip Road </option>
+                        <option value='8' > Mid Junction </option>
+                    </select>
+                </div><br>
+                <div class="dropdown"> SKIDDING: <br>
+                    <select class="btn btn-secondary dropdown-toggle" type="button" id="skidding_id" name="skidding_id" data-toggle="dropdown">
+                        <option value='-1' > MISSING  </option>
+                        <option value='0' > NONE  </option>
+                        <option value='1' > SKIDDED </option>
+                        <option value='2' > SKIDDED AND OVERTURNED  </option>
+                        <option value='3' > Jackknifed </option>
+                        <option value='4' > Jackknifed AND OVERTURNED</option>
+                        <option value='5' > OVERTURNED </option>
+                    </select>
+                </div><br>
+                <div class="dropdown"> HIT OBJECT: <br>
+                    <select class="btn btn-secondary dropdown-toggle" type="button" id="hit_object_id" name="hit_object_id" data-toggle="dropdown">
+                        <option value='-1' > MISSING  </option>
+                        <option value='0' > NONE </option>
+                        <option value='1' > Previous accident </option>
+                        <option value='2' > Road work </option>
+                        <option value='4' > Parked Vehicle </option>
+                        <option value='5' > Bridge Roof </option>
+                        <option value='6' > Bridge Side </option>
+                        <option value='7' > Bollard </option>
+                        <option value='8' > Open Door of Vehicle </option>
+                        <option value='9' > Central Island of Roundabout </option>
+                        <option value='10' > Kerb </option>
+                        <option value='11' > Bollard </option>
+                        <option value='12' > Any Animal </option>
+                    </select>
+                </div><br>
+                <div class="dropdown"> Point of Impact: <br>
+                    <select class="btn btn-secondary dropdown-toggle" type="button" id="point_of_impact_id" name="point_of_impact_id" data-toggle="dropdown">
+                        <option value='-1' > MISSING  </option>
+                        <option value='0' > NONE  </option>
+                        <option value='1' > front </option>
+                        <option value='2' > back </option>
+                        <option value='3' > Offside </option>
+                        <option value='4' > Near Side </option>
+                    </select>
+                </div><br>
+                <div class="dropdown"> Was it a left hand drive: <br>
+                    <select class="btn btn-secondary dropdown-toggle" type="button" id="left_hand_drive_id" name="left_hand_drive_id" data-toggle="dropdown">
+                        <option value='-1' > MISSING  </option>
+                        <option value='1' > NO </option>
+                        <option value='2' > YES </option>
+                    </select>
+                </div><br>
+                <div class="dropdown"> Purpose OF Journey : <br>
+                    <select class="btn btn-secondary dropdown-toggle" type="button" id="journey_purpose_id" name="journey_purpose_id" data-toggle="dropdown">
+                        <option value='-1' > MISSING  </option>
+                        <option value='1' > Journey as part of work  </option>
+                        <option value='2' > Commuting to/from work </option>
+                        <option value='3' > Taking pupil to/from school </option>
+                        <option value='4' > Pupil riding to/from school </option>
+                        <option value='5' > OTHER </option>
+                        <option value='6' > UNKNOWN </option>
+                    </select>
+                </div><br>
+                <div class="dropdown"> GENDER: <br>
+                    <select class="btn btn-secondary dropdown-toggle" type="button" id="gender_id" name="gender_id" data-toggle="dropdown">
+                        <option value='-1' > MISSING  </option>
+                        <option value='1' > MALE </option>
+                        <option value='2' > FEMALE </option>
+                        <option value='3' > Unknwon </option>
+                    </select>
+                </div><br>
+                <div class="form-group">
+                    <label for="age_casualty">Age: </label>
+                    <input type="text" class="form-control" id="age_driver" name="age_driver">
+                </div>
+                <div class="dropdown"> AGE BAND: <br>
+                    <select class="btn btn-secondary dropdown-toggle" type="button" id="age_band_driver_id" name="age_band_driver_id" data-toggle="dropdown">
+                        <option value='1' > 0-5  </option>
+                        <option value='2' > 6-10</option>
+                        <option value='3' > 11-15 </option>
+                        <option value='4' > 16-20</option>
+                        <option value='5' > 21-25 </option>
+                        <option value='6' > 26-35</option>
+                        <option value='7' > 36-45 </option>
+                        <option value='8' > 46-55</option>
+                        <option value='9' > 56-65 </option>
+                        <option value='10' > 66-75</option>
+                        <option value='11' > above 75 </option>
+                    </select>
+                </div><br>
+                <div class="form-group">
+                    <label for="engine_capacity">Engine Capacity: </label>
+                    <input type="text" class="form-control" id="engine_capacity" name="engine_capacity">
+                </div>
+                <div class="dropdown"> VEHICLE PROPULSION: <br>
+                    <select class="btn btn-secondary dropdown-toggle" type="button" id="vehicle_propulsion_id" name="vehicle_propulsion_id" data-toggle="dropdown">
+                        <option value='1' > PETROL  </option>
+                        <option value='2' > HEAVY OIL</option>
+                        <option value='3' > eV </option>
+                        <option value='4' > STEAM </option>
+                        <option value='5' > GAS </option>
+                        <option value='6' > PETROL/GAS </option>
+                        <option value='7' > GAS/BI FUEL </option>
+                        <option value='8' > TURBO HYBRID</option>
+                        <option value='9' > GAS DIESEL </option>
+                        <option value='10' > NEW FUEL TECH</option>
+                        <option value='11' > FUEL CELLS </option>
+                    </select>
+                </div><br>
+                <div class="form-group">
+                    <label for="vehicle_age">Age of the Vehicle: </label>
+                    <input type="text" class="form-control" id="vehicle_age" name="vehicle_age">
+                </div>
+                <div class="dropdown"> HOME AREA TYPE: <br>
+                    <select class="btn btn-secondary dropdown-toggle" type="button" id="home_area_type_id" name="home_area_type_id" data-toggle="dropdown">
+                        <option value='-1' > MISSING  </option>
+                        <option value='1' > URBAM </option>
+                        <option value='2' > SMALL TOWN </option>
+                        <option value='3' > RURAL </option>
+                    </select>
+                </div><br>
+                <br><br>
+                <button type="submit" class="btn btn-primary">ADD ENTRIES</button><br>
+
+            </form><br>
+        </div>
+    </div>
+
+    {{#if message }}
+        <h4 class="msg_not_found"> {{message}} </h4>
+    {{/if}}
+    
+  </div>
+  <script src="js/scripts.js"></script>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+
+</body>
+</html>
