@@ -201,7 +201,47 @@ function updatevis(req, res){
     })
 }
 
+function recyclevis(req, res){
+    db.query('CALL recycle_bin_delete();', function (error, rows, fields){
+        if(error){
+            console.log(error);
+        }
+    })
+    db.query('SELECT * FROM recycle_bin WHERE user_email = ?;', [user.email], function (error, rows, fields){
+        var list;
+        if(error){
+            console.log(error);
+        }
+        else{
+            var list = JSON.parse(JSON.stringify(rows));
+        }
+        res.render('recycle_bin',  {email: user.email, list: list});
+    })
+}
+
+function restorevis(req, res){
+    db.query('DELETE FROM recycle_bin WHERE recycle_id = ?;', [parseInt(req.params.data)], function (error, rows, fields){
+        if(error){
+            console.log(error);
+        }
+    })
+    db.query('SELECT * FROM saved WHERE user_email = ?;', [user.email], function (error, rows, fields){
+        var list;
+        if(error){
+            console.log(error);
+        }
+        else{
+            // console.log(rows);
+            var list = JSON.parse(JSON.stringify(rows));
+            // console.log(list);
+        }
+        res.render('user_home',  {email: user.email, list: list});
+    })
+}
+
 exports.save = savevis;
 exports.open = opensavedvis;
 exports.delete = deletevis;
 exports.update = updatevis;
+exports.recycle = recyclevis;
+exports.restore = restorevis;

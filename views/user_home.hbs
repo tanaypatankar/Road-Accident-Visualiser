@@ -8,7 +8,11 @@
   {{> logged_in_navbar email = email}}
   
       <div class="row" style="padding-top: 50px;">
-        <div class = "col s9"></div>
+        <div class = "col s6"></div>
+        <form action = "/recycle" method = "post">
+          <button id="recyclebutton" class="col s2 btn btn-primary" style="background-color:indigo;"><i class="material-icons left">restore</i>RESTORE VISUALISATION</button>
+        </form>
+        <div class = "col s1"></div>
         <button id="visbutton" href="#vis-modal" class="col s2 btn btn-primary modal-trigger" style="background-color:indigo;"><i class="material-icons left">add</i>CREATE A VISUALISATION</button>
           <!-- Modal Structure -->
         <div id="vis-modal" class="modal">
@@ -19,7 +23,7 @@
       <div class = "col s1"></div>
       </div>
       <br>
-      <div class="container">
+      <div class="container" style="width: 85%;">
         <h4>Saved Visualisations</h4>
         <hr>
         <div class="row">

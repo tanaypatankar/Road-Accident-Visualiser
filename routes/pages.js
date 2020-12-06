@@ -17,12 +17,17 @@ router.get('/login', (req,res) => {
 router.get('/register', (req,res) => {
     res.render('register.hbs')
 } );
+router.get('/recycle_bin', (req,res) => {
+    res.render('recycle_bin.hbs')
+} );
 
 router.post('/submitregister', user.register);
 router.post('/save', saved.save);
 router.post('/open/:data', saved.open);
 router.post('/delete/:data', saved.delete);
 router.post('/update/:data', saved.update);
+router.post('/recycle', saved.recycle);
+router.post('/restore/:data', saved.restore);
 router.post('/submitlogin', user.login);
 
 
