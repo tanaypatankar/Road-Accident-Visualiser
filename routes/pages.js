@@ -37,7 +37,7 @@ router.get('/idx', (req, res) => {
     res.render('idx'); 
 });
 router.get('/add', (req, res) => {
-    res.render('add');
+    res.render('add', {email: user.email});
 });
 router.get('/add_casualties', (req, res) => {
     res.render('add_casualties'); 

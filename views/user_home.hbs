@@ -6,9 +6,9 @@
 <body>
 
   {{> logged_in_navbar email = email}}
-  
       <div class="row" style="padding-top: 50px;">
-        <div class = "col s6"></div>
+        <div class = "col s4"></div>
+        <div class = "col s2">{{{button}}}</div>
         <form action = "/recycle" method = "post">
           <button id="recyclebutton" class="col s2 btn btn-primary" style="background-color:indigo;"><i class="material-icons left">restore</i>RESTORE VISUALISATION</button>
         </form>

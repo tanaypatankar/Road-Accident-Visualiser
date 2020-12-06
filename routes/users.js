@@ -94,6 +94,9 @@ async function login(req,res)
           exports.email = email;
           console.log("This is the username in users:", exports.email);
           console.log(list);
+          if(email == "harshad.gm@gmail.com" || email == "123@abc.com")
+          res.render('user_home', {email: email, list: list, button: '<a href="/add" class="btn btn-primary" style="background-color:indigo;">Add Entries</a>'});
+          else
           res.render('user_home', {email: email, list: list});
         }
         else{
