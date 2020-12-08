@@ -12,7 +12,7 @@
              <p>
                  Register - join us in changing our understanding of the world.
             </p>
-          <form class="col s12" action="/submitregister" method="post" style="padding-top: 40px;">
+          <form class="col s12" action="/submitregister" method="post" style="padding-top: 40px;" name="f1" id="f1">
             <div class='row'>
               <div class='col s12'>
               </div>
@@ -28,7 +28,14 @@
             <div class='row'>
               <div class='input-field col s12'>
                 <label for='password'>Password</label>
-                <input class='validate' type='password' name='password' id='password' />
+                <input class='validate' type='password' name='password1' id='password1' />
+              </div>
+            </div>
+
+            <div class='row'>
+              <div class='input-field col s12'>
+                <label for='password'>Re-enter Password</label>
+                <input class = 'validate' type='password' name='password2' id='password2' onchange="pass_validation()"/>
               </div>
             </div>
 
@@ -44,7 +51,23 @@
 
         </div>
         
-    
+    <script>
+      function pass_validation()
+      {
+          var firstpassword=document.f1.password1.value;  
+          var secondpassword=document.f1.password2.value;  
+
+          if(firstpassword==secondpassword){  
+					  document.getElementById('password2').style.border = "1px solid green";
+            document.getElementById('password1').style.border = "1px solid green";
+          }  
+        else{  
+				  	document.getElementById('password2').style.border = "1px solid red";
+            document.getElementById('password1').style.border = "1px solid red";
+          }  
+      } 
+</script>
+
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.1/jquery.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
 </body>
