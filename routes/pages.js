@@ -29,21 +29,20 @@ router.post('/update/:data', saved.update);
 router.post('/recycle', saved.recycle);
 router.post('/restore/:data', saved.restore);
 router.post('/submitlogin', user.login);
+router.post('/redirecthome', user.redirecthome);
 
 
 
 //FOR INSERTION FORM
-router.get('/idx', (req, res) => {
-    res.render('idx'); 
-});
+
 router.get('/add', (req, res) => {
     res.render('add', {email: user.email});
 });
 router.get('/add_casualties', (req, res) => {
-    res.render('add_casualties'); 
+    res.render('add_casualties' ,{email: user.email}); 
 });
 router.get('/add_vehicles', (req, res) => {
-    res.render('add_vehicles');
+    res.render('add_vehicles', {email: user.email});
 });
 
 module.exports = router;

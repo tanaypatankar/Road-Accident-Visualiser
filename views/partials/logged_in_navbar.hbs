@@ -2,9 +2,9 @@
   <div class="nav-wrapper black">
     <a href="#!" class="brand-logo" style="padding-left: 10px;"><i class="material-icons">poll</i>Accident Viz</a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
-      <li><a href="/"><i class="material-icons left">home</i>Home</a></li>
-      {{!-- {{#isNull this}} --}}
-      <li><a href="#">{{this.email}}<i class="material-icons left">person</i></a></li>
+      <li><form action="/redirecthome" method="POST">
+            <button id = "email" name="email" class="btn" value='{{{email}}}'>{{email}}</button>
+      </form></li>
       <li><a href="/"><i class="material-icons left">logout</i>Logout</a></li>
       </ul>
   </div>

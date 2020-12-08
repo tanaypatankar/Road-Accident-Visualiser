@@ -116,5 +116,61 @@ async function login(req,res)
   });
 }
 
+function redirecthome(req, res)
+{
+  var email= req.body.email;
+  console.log(email);
+  var list;
+  db.query('SELECT * FROM saved WHERE user_email = ?;', [email],async function (error, rows, fields){
+    if(error){
+        console.log(error);
+    }
+    else{
+        // return rows;
+        list = JSON.parse(JSON.stringify(rows));
+        // console.log(list);
+    }
+  })
+  // To be copied wherever saved list is to be passed - END
+
+
+  db.query('SELECT * FROM users WHERE email = ?;',[email], async function (error, results, fields) {
+    if (error) {
+      res.send({
+        'code':400,
+        'failed': 'An error occurred while connecting to the MySQL db:\n' + error.stack
+      })
+    }
+    else
+    {
+      if(results.length > 0){
+        console.log(results);
+        if(true){
+          exports.email = email;
+          console.log("This is the username in users:", exports.email);
+          console.log(list);
+          if(email == "harshad.gm@gmail.com" || email == "123@abc.com")
+          res.render('user_home', {email: email, list: list, button: '<a href="/add" class="btn btn-primary" style="background-color:indigo;">Add Entries</a>'});
+          else
+          res.render('user_home', {email: email, list: list});
+        }
+        else{
+          res.send({
+               'code':204,
+               'success':'Invalid email and password'
+          })
+        }
+      }
+      else{
+        res.send({
+          'code':206,
+          'success':'Unregistered email entered'
+            });
+      }
+    }
+  });
+}
+
+exports.redirecthome = redirecthome;
 exports.login = login;
 exports.register = register;
