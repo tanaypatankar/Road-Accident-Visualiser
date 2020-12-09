@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 {{> header}}
+
 <body>
   {{> navbar}}
     <div class="container row">
         <div class="col s4">
-           
         </div>
         <div class="col s4 z-depth-1 grey lighten-4 row" style="display: inline-block; padding: 32px 48px 40px 48px; border: 1px solid #EEE;">
         <div class="row">
@@ -44,7 +44,10 @@
 
         </div>
         
-    
+      <script>
+      if('{{{error}}}' != null)
+      alert('{{{error}}}');
+      </script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.1/jquery.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
 </body>

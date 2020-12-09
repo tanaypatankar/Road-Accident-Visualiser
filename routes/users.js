@@ -28,10 +28,10 @@ async function register(req,res)
      else{
        if(results.length != 0)
        {
-        res.send({
-          'code':204,
-          'failed':'User already exists:\n'
-        })
+        res.render(
+          'register',
+          {error: "Email already exists."}
+     );
        }
        else{
         db.query('INSERT INTO users SET ?',users, function (error, results, fields) {
@@ -100,17 +100,17 @@ async function login(req,res)
           res.render('user_home', {email: email, list: list});
         }
         else{
-          res.send({
-               'code':204,
-               'success':'Invalid email and password'
-          })
+          res.render(
+               'login',
+               {error: "Invalid email and password."}
+          );
         }
       }
       else{
-        res.send({
-          'code':206,
-          'success':'Unregistered email entered'
-            });
+        res.render(
+          'login',
+          {error: "Unregistered email entered."}
+     );
       }
     }
   });
@@ -145,27 +145,19 @@ function redirecthome(req, res)
     {
       if(results.length > 0){
         console.log(results);
-        if(true){
-          exports.email = email;
-          console.log("This is the username in users:", exports.email);
-          console.log(list);
-          if(email == "harshad.gm@gmail.com" || email == "123@abc.com")
-          res.render('user_home', {email: email, list: list, button: '<a href="/add" class="btn btn-primary" style="background-color:indigo;">Add Entries</a>'});
-          else
-          res.render('user_home', {email: email, list: list});
-        }
-        else{
-          res.send({
-               'code':204,
-               'success':'Invalid email and password'
-          })
-        }
+        exports.email = email;
+        console.log("This is the username in users:", exports.email);
+        console.log(list);
+        if(email == "harshad.gm@gmail.com" || email == "123@abc.com")
+        res.render('user_home', {email: email, list: list, button: '<a href="/add" class="btn btn-primary" style="background-color:indigo;">Add Entries</a>'});
+        else
+        res.render('user_home', {email: email, list: list});
       }
       else{
-        res.send({
-          'code':206,
-          'success':'Unregistered email entered'
-            });
+        res.render(
+          'login',
+          {error: "Unregistered email entered."}
+     );
       }
     }
   });
