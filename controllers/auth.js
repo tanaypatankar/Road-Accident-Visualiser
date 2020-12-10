@@ -1,6 +1,6 @@
 //GLOBAL VAR
 var acc_idx, no_casualties, no_vehicles; 
-const user = require("../routes/users.js");
+// const user = require("../routes/users.js");
 
 //MYSQL STUFF
 const mysql = require('mysql');
