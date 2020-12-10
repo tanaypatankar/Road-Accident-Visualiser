@@ -31,9 +31,9 @@ exports.register = (req, res) => {
         res.render('add', {email: user.email, error: "Please make sure all fields are not null"});
     }
     // YEAR VALIDATIONS
-    if(year_id == accident_date.split('-')[0]){
-        console.log('bad year');
-        // res.render('add', {email: user.email, error: "Year doesn't match"});
+    if(year_id != accident_date.split('-')[0]){
+        // console.log('bad year');
+        res.render('add', {email: user.email, error: "Year doesn't match"});
     }
     // Year does not match
 

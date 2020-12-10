@@ -24,7 +24,7 @@ exports.create = (req, res) =>
     {
         if(typeof(year) == 'string')
         {
-            query = 'select latitude as lat, longitude as lng, accident_time as time from accident where accident_index like \'' + year +'%\' and latitude IS NOT NULL;'
+            query = 'select latitude as lat, longitude as lng, accident_time as time, gender_id as gender, vehicle_type_id as vehicle_type from accident natural join vehicle where accident_index like \'' + year +'%\' and latitude IS NOT NULL;'
             year = [year];
         }
         else 

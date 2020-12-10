@@ -124,6 +124,29 @@
             var chartdwnldbtn = document.getElementById("dwnldimg");
             chart.style.display = "none";
             chartdwnldbtn.style.display = "none";
+            var gendermap = ["Data missing or out of range", "Male", "Female", "Not known"];
+            var vehmap = {};
+            vehmap[-1]= "Data missing or out of range";
+            vehmap[1]= "Pedal cycle";
+            vehmap[2]= "Motorcycle 50cc and under";
+            vehmap[3]= "Motorcycle 125cc and under";
+            vehmap[4]= "Motorcycle over 125cc and up to 500cc";
+            vehmap[5]= "Motorcycle over 500cc";
+            vehmap[8]= "Taxi/Private hire car";
+            vehmap[9]= "Car";
+            vehmap[10]= "Minibus (8 - 16 passenger seats)";
+            vehmap[11]= "Bus or coach (17 or more pass seats)";
+            vehmap[16]= "Ridden horse";
+            vehmap[17]= "Agricultural vehicle";
+            vehmap[18]= "Tram";
+            vehmap[19]= "Van / Goods 3.5 tonnes mgw or under";
+            vehmap[20]= "Goods over 3.5t. and under 7.5t";
+            vehmap[21]= "Goods 7.5 tonnes mgw and over";
+            vehmap[22]= "Mobility scooter";
+            vehmap[23]= "Electric motorcycle";
+            vehmap[90]= "Other vehicle";
+            vehmap[97]= "Motorcycle - unknown cc";
+            vehmap[98]= "Goods vehicle - unknown weight";
             // See post: http://asmaloney.com/2015/06/code/clustering-markers-on-leaflet-maps
             
             var map = L.map( 'map', {
@@ -149,7 +172,9 @@
             
             for ( var i = 0; i < records.length; ++i )
             {
-            var popup = '<b>Time of Accident:</b><br/>' + records[i].time;
+           var popup = '<b>Time of Accident:</b><br/>' + records[i].time +
+            '<br/><b>Gender of Driver:</b><br/>' + gendermap[records[i].gender+1] +
+            '<br/><b>Type of vehicle:</b><br/>' + vehmap[records[i].vehicle_type];
 
             var m = L.marker( [records[i].lat, records[i].lng], {icon: myIcon} )
                             .bindPopup( popup );
