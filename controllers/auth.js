@@ -3,6 +3,7 @@ var acc_idx, no_casualties, no_vehicles;
 
 //MYSQL STUFF
 const mysql = require('mysql');
+const user = require("../routes/users.js");
 //CONNECT TO THE
 const db  = mysql.createPool({
     connectionLimit : 1,
@@ -23,6 +24,12 @@ exports.register = (req, res) => {
     no_casualties= num_casualty; 
     no_vehicles = num_vehicles; 
 
+    // EMPTY VALIDATIONS
+    console.log(longitude != '' && latitude != '' && num_vehicles != '' && num_casualty != '' && accident_time != '' && speed_limit != ''); // Enter Data in all the fields
+    
+    // YEAR VALIDATIONS
+    console.log(year_id == accident_date.split('-')[0]); //Year does not match
+
     db.query("SELECT accident_index FROM accident WHERE accident_index = ?", [accident_index], (error, results) => {
         if(error){
             console.log(error);
@@ -41,20 +48,11 @@ exports.register = (req, res) => {
         else {
             if(no_casualties > 0 ){
                 console.log("Adding Values for ", no_casualties, "/",  no_casualties,  "for Accident Index: ", acc_idx);
-                return res.render('add_casualties'); 
+                return res.render('add_casualties', {email: user.email}); 
             }
             else {
-                return res.render('add_vehicles');
+                return res.render('add_vehicles', {email: user.email});
             }
-            /*
-            for(i = 0; i < no_casualties; i++){
-                console.log("Adding Values for ", i+1, "/",  no_casualties,  "for Accident Index: ", acc_idx);
-                return res.render('add_casualties'); 
-            }
-            for(i = 0; i < no_vehicles; i++){
-                console.log("Adding Values for ", i+1, "/",  no_vehicles,  "for Accident Index: ", acc_idx);
-                return res.render('add_vehicles'); 
-            }*/
         }
     });  
 };
@@ -64,6 +62,46 @@ exports.add_casualties = (req, res) => {
     casualty_id = 0;
     const{ casualty_class_id, gender_id, age_casualty, age_band_driver_id,casualty_severity_id,  ped_location_id, ped_movement_id, car_passenger_id, bus_passenger_id, ped_road_maint_worker_id, casualty_type_id, home_area_type_id } = req.body; 
 
+    // AGE VALIDATIONS , add this in the vehicle ka age band as well
+    if(age_band_driver_id == '1' && parseInt(age_casualty) > 5){
+        console.log(false);
+    }
+    else if(age_band_driver_id == '2' && parseInt(age_casualty) > 10){
+        console.log(false);
+    }
+    else if(age_band_driver_id == '3' && parseInt(age_casualty) > 15){
+        console.log(false);
+    }
+    else if(age_band_driver_id == '4' && parseInt(age_casualty) > 20){
+        console.log(false);
+    }
+    else if(age_band_driver_id == '5' && parseInt(age_casualty) > 25){
+        console.log(false);
+    }
+    else if(age_band_driver_id == '6' && parseInt(age_casualty) > 35){
+        console.log(false);
+    }
+    else if(age_band_driver_id == '7' && parseInt(age_casualty) > 45){
+        console.log(false);
+    }
+    else if(age_band_driver_id == '8' && parseInt(age_casualty) > 55){
+        console.log(false);
+    }
+    else if(age_band_driver_id == '9' && parseInt(age_casualty) > 65){
+        console.log(false);
+    }
+    else if(age_band_driver_id == '10' && parseInt(age_casualty) > 75){
+        console.log(false);
+    }
+    else if(age_band_driver_id == '11' && parseInt(age_casualty) < 75){
+        console.log(false);
+    }
+    else{
+        console.log(true);
+    }
+
+    // res.render('add_casualties', {email: user.email});
+
     db.query("INSERT INTO casualty SET ? ", { casualty_id: casualty_id, accident_index:acc_idx,casualty_class_id: casualty_class_id, gender_id: gender_id, age_casualty: age_casualty,age_band_driver_id:age_band_driver_id,casualty_severity_id:casualty_severity_id,  ped_location_id:ped_location_id, ped_movement_id:ped_movement_id, car_passenger_id:car_passenger_id, bus_passenger_id:bus_passenger_id, ped_road_maint_worker_id:ped_road_maint_worker_id, casualty_type_id:casualty_type_id, home_area_type_id:home_area_type_id }, (error, results) => {
         if(error){
             console.log(error); 
@@ -72,10 +110,10 @@ exports.add_casualties = (req, res) => {
             no_casualties--; 
             if(no_casualties != 0) {
                 //console.log("Adding Values for ", no_casualties-i-1, "/",  no_casualties,  "for Accident Index: ", acc_idx);
-                return res.render('add_casualties'); 
+                return res.render('add_casualties', {email: user.email}); 
             }
             else{                
-                return res.render('add_vehicles'); 
+                return res.render('add_vehicles', {email: user.email}); 
             }
         }
     });  
@@ -94,7 +132,7 @@ exports.add_vehicles = (req, res) => {
             no_vehicles--; 
             if(no_vehicles != 0) {
                 console.log("Adding Values for Accident Index: ", acc_idx);
-                return res.render('add_vehicles'); 
+                return res.render('add_vehicles', {email: user.email}); 
             }
             else{                
                 return res.render('idx'); 
