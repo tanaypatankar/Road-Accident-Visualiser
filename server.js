@@ -7,7 +7,7 @@ let cors = require('cors')
 var hbs = require('hbs');
 const { extname } = require("path");
 
-hbs.registerPartials(__dirname + '/views/partials');
+hbs.registerPartials(__dirname + 'views/partials');
 // Set env path
 dotenv.config({path: './.env'});
 

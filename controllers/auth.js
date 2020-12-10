@@ -1,5 +1,6 @@
 //GLOBAL VAR
 var acc_idx, no_casualties, no_vehicles; 
+const user = require("../routes/users.js");
 
 //MYSQL STUFF
 const mysql = require('mysql');
@@ -97,7 +98,7 @@ exports.add_vehicles = (req, res) => {
                 return res.render('add_vehicles'); 
             }
             else{                
-                return res.render('idx'); 
+                return res.render('user_home', {email: user.email}); 
             }
         }
     });  
