@@ -6,8 +6,9 @@ const bodyparser = require('body-parser');
 let cors = require('cors')
 var hbs = require('hbs');
 const { extname } = require("path");
+// const path = require("path")
 
-hbs.registerPartials(__dirname + 'views/partials');
+hbs.registerPartials(path.join(__dirname + 'views/partials'));
 // Set env path
 dotenv.config({path: './.env'});
 
