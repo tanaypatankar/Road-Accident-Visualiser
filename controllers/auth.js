@@ -26,18 +26,26 @@ exports.register = (req, res) => {
     no_vehicles = num_vehicles; 
 
     // EMPTY VALIDATIONS
-    console.log(longitude != '' && latitude != '' && num_vehicles != '' && num_casualty != '' && accident_time != '' && speed_limit != ''); // Enter Data in all the fields
-    
+    if(longitude == '' || latitude == '' || num_vehicles == '' || num_casualty == '' || accident_time == '' || speed_limit == '')
+    {
+        console.log("In empty error");
+        res.render('add', {email: user.email, error: "Please make sure all fields are not null"});
+    }
     // YEAR VALIDATIONS
-    console.log(year_id == accident_date.split('-')[0]); //Year does not match
+    if(year_id == accident_date.split('-')[0]){
+        console.log('bad year');
+        // res.render('add', {email: user.email, error: "Year doesn't match"});
+    }
+    // Year does not match
 
     db.query("SELECT accident_index FROM accident WHERE accident_index = ?", [accident_index], (error, results) => {
         if(error){
             console.log(error);
         }
         if(results.length > 0){
-            return res.render('add', {
-                message: "THAT INDEX WAS USED BEFORE", 
+            res.render('add', {
+                error: "THAT INDEX WAS USED BEFORE",
+ 
             }); 
         }
     }); 
@@ -49,10 +57,10 @@ exports.register = (req, res) => {
         else {
             if(no_casualties > 0 ){
                 console.log("Adding Values for ", no_casualties, "/",  no_casualties,  "for Accident Index: ", acc_idx);
-                return res.render('add_casualties', {email: user.email}); 
+                res.render('add_casualties', {email: user.email}); 
             }
             else {
-                return res.render('add_vehicles', {email: user.email});
+                res.render('add_vehicles', {email: user.email});
             }
         }
     });  
@@ -65,40 +73,37 @@ exports.add_casualties = (req, res) => {
 
     // AGE VALIDATIONS , add this in the vehicle ka age band as well
     if(age_band_driver_id == '1' && parseInt(age_casualty) > 5){
-        console.log(false);
+        res.render('add_casualties', {email: user.email, error: "Age validation failed."});
     }
     else if(age_band_driver_id == '2' && parseInt(age_casualty) > 10){
-        console.log(false);
+        res.render('add_casualties', {email: user.email, error: "Age validation failed."});
     }
     else if(age_band_driver_id == '3' && parseInt(age_casualty) > 15){
-        console.log(false);
+        res.render('add_casualties', {email: user.email, error: "Age validation failed."});
     }
     else if(age_band_driver_id == '4' && parseInt(age_casualty) > 20){
-        console.log(false);
+        res.render('add_casualties', {email: user.email, error: "Age validation failed."});
     }
     else if(age_band_driver_id == '5' && parseInt(age_casualty) > 25){
-        console.log(false);
+        res.render('add_casualties', {email: user.email, error: "Age validation failed."});
     }
     else if(age_band_driver_id == '6' && parseInt(age_casualty) > 35){
-        console.log(false);
+        res.render('add_casualties', {email: user.email, error: "Age validation failed."});
     }
     else if(age_band_driver_id == '7' && parseInt(age_casualty) > 45){
-        console.log(false);
+        res.render('add_casualties', {email: user.email, error: "Age validation failed."});
     }
     else if(age_band_driver_id == '8' && parseInt(age_casualty) > 55){
-        console.log(false);
+        res.render('add_casualties', {email: user.email, error: "Age validation failed."});
     }
     else if(age_band_driver_id == '9' && parseInt(age_casualty) > 65){
-        console.log(false);
+        res.render('add_casualties', {email: user.email, error: "Age validation failed."});
     }
     else if(age_band_driver_id == '10' && parseInt(age_casualty) > 75){
-        console.log(false);
+        res.render('add_casualties', {email: user.email, error: "Age validation failed."});
     }
     else if(age_band_driver_id == '11' && parseInt(age_casualty) < 75){
-        console.log(false);
-    }
-    else{
-        console.log(true);
+        res.render('add_casualties', {email: user.email, error: "Age validation failed."});
     }
 
     // res.render('add_casualties', {email: user.email});
@@ -111,10 +116,10 @@ exports.add_casualties = (req, res) => {
             no_casualties--; 
             if(no_casualties != 0) {
                 //console.log("Adding Values for ", no_casualties-i-1, "/",  no_casualties,  "for Accident Index: ", acc_idx);
-                return res.render('add_casualties', {email: user.email}); 
+                res.render('add_casualties', {email: user.email}); 
             }
             else{                
-                return res.render('add_vehicles', {email: user.email}); 
+                res.render('add_vehicles', {email: user.email}); 
             }
         }
     });  
@@ -124,7 +129,39 @@ exports.add_vehicles = (req, res) => {
     console.log(req.body); 
     vehicle_id = 0;
     const{ vehicle_type_id, towing_id, vehicle_manoeuvre_id,vehicle_location_id, junction_location_id, skidding_id, hit_object_id, point_of_impact_id, left_hand_drive_id, journey_purpose_id, gender_id, age_driver, age_band_driver_id, engine_capacity,vehicle_propulsion_id, vehicle_age, home_area_type_id  } = req.body; 
-
+    if(age_band_driver_id == '1' && parseInt(age_driver) > 5){
+        res.render('add_vehicles', {email: user.email, error: "Age validation failed."});
+    }
+    else if(age_band_driver_id == '2' && parseInt(age_driver) > 10){
+        res.render('add_vehicles', {email: user.email, error: "Age validation failed."});
+    }
+    else if(age_band_driver_id == '3' && parseInt(age_driver) > 15){
+        res.render('add_vehicles', {email: user.email, error: "Age validation failed."});
+    }
+    else if(age_band_driver_id == '4' && parseInt(age_driver) > 20){
+        res.render('add_vehicles', {email: user.email, error: "Age validation failed."});
+    }
+    else if(age_band_driver_id == '5' && parseInt(age_driver) > 25){
+        res.render('add_vehicles', {email: user.email, error: "Age validation failed."});
+    }
+    else if(age_band_driver_id == '6' && parseInt(age_driver) > 35){
+        res.render('add_vehicles', {email: user.email, error: "Age validation failed."});
+    }
+    else if(age_band_driver_id == '7' && parseInt(age_driver) > 45){
+        res.render('add_vehicles', {email: user.email, error: "Age validation failed."});
+    }
+    else if(age_band_driver_id == '8' && parseInt(age_driver) > 55){
+        res.render('add_vehicles', {email: user.email, error: "Age validation failed."});
+    }
+    else if(age_band_driver_id == '9' && parseInt(age_driver) > 65){
+        res.render('add_vehicles', {email: user.email, error: "Age validation failed."});
+    }
+    else if(age_band_driver_id == '10' && parseInt(age_driver) > 75){
+        res.render('add_vehicles', {email: user.email, error: "Age validation failed."});
+    }
+    else if(age_band_driver_id == '11' && parseInt(age_driver) < 75){
+        res.render('add_vehicles', {email: user.email, error: "Age validation failed."});
+    }
     db.query("INSERT INTO vehicle SET ? ", { vehicle_id: vehicle_id, accident_index:acc_idx, vehicle_type_id:vehicle_type_id, towing_id:towing_id, vehicle_manoeuvre_id:vehicle_manoeuvre_id,vehicle_location_id:vehicle_location_id, junction_location_id:junction_location_id, skidding_id:skidding_id, hit_object_id:hit_object_id, point_of_impact_id:point_of_impact_id, left_hand_drive_id:left_hand_drive_id, journey_purpose_id:journey_purpose_id, gender_id:gender_id, age_driver:age_driver, age_band_driver_id:age_band_driver_id, engine_capacity:engine_capacity,vehicle_propulsion_id:vehicle_propulsion_id, vehicle_age:vehicle_age, home_area_type_id:home_area_type_id  }, (error, results) => {
         if(error){
             console.log(error); 
@@ -133,10 +170,54 @@ exports.add_vehicles = (req, res) => {
             no_vehicles--; 
             if(no_vehicles != 0) {
                 console.log("Adding Values for Accident Index: ", acc_idx);
-                return res.render('add_vehicles', {email: user.email}); 
+                res.render('add_vehicles', {email: user.email}); 
             }
             else{                
-                return res.render('user_home', {email: user.email}); 
+                
+                var email= user.email;
+                console.log(email);
+                var list;
+                db.query('SELECT * FROM saved WHERE user_email = ?;', [email],async function (error, rows, fields){
+                    if(error){
+                        console.log(error);
+                    }
+                    else{
+                        // return rows;
+                        list = JSON.parse(JSON.stringify(rows));
+                        // console.log(list);
+                    }
+                })
+                // To be copied wherever saved list is to be passed - END
+
+
+                db.query('SELECT * FROM users WHERE email = ?;',[email], async function (error, results, fields) {
+                    if (error) {
+                    res.send({
+                        'code':400,
+                        'failed': 'An error occurred while connecting to the MySQL db:\n' + error.stack
+                    })
+                    }
+                    else
+                    {
+                    if(results.length > 0){
+                        console.log(results);
+                        exports.email = email;
+                        console.log("This is the username in users:", exports.email);
+                        console.log(list);
+                        if(email == "harshad.gm@gmail.com" || email == "123@abc.com")
+                        res.render('user_home', {email: email, list: list, button: '<a href="/add" class="btn btn-primary" style="background-color:indigo;">Add Entries</a>'});
+                        else
+                        res.render('user_home', {email: email, list: list});
+                    }
+                    else{
+                        res.render(
+                        'login',
+                        {error: "Unregistered email entered."}
+                    );
+                    }
+                    }
+                });
+
             }
         }
     });  

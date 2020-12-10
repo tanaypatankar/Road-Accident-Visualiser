@@ -32,9 +32,9 @@ app.use('/vis', require('./routes/vis'));
 
 //AUTHORIZE FORM
 const authController = require('./controllers/auth'); 
-app.post("/auth/add", authController.register);
-app.post("/auth/add_casualties", authController.add_casualties);
-app.post("/auth/add_vehicles", authController.add_vehicles);
+app.post("/add", authController.register);
+app.post("/add_casualties", authController.add_casualties);
+app.post("/add_vehicles", authController.add_vehicles);
 
 // Start express on port 5000
 app.listen(5009, () => {
