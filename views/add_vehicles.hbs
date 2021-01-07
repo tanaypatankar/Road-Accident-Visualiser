@@ -7,7 +7,7 @@
    {{> logged_in_navbar email = email}}
 
   <div class="container mt-4">
-            <form action="/auth/add_vehicles" method="POST">
+            <form action="/add_vehicles" method="POST">
                 
                 <!--
                 <div class="form-group">
@@ -229,6 +229,10 @@
     {{/if}}
     
   </div>
+  <script>
+      if('{{{error}}}' != null && '{{{error}}}' != '')
+      alert('{{{error}}}');
+      </script>
   <script src="js/scripts.js"></script>
 
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

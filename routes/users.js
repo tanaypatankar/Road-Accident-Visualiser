@@ -12,9 +12,16 @@ const db  = mysql.createPool({
 // var list = [{name: "harshad"}, {name: "harshad"}, {name: "harshad"}, {name: "tanay"}];
 async function register(req,res)
 {
-  const password = req.body.password;
-  const encryptedPassword = await bcrypt.hash(password, saltRounds)
+  const password = req.body.password1;
+  console.log(req.body);
+  var encryptedPassword;
+  try {
+    encryptedPassword = await bcrypt.hash(password, saltRounds);
 
+  } catch (error) {
+    console.log(error);
+  }
+  
   //the users dictionary is what goes into the db, the keys are column names.
   var users={
      'email': req.body.email,
@@ -46,7 +53,7 @@ async function register(req,res)
           {
             exports.email = users.email;
             console.log("This is the username in users:", exports.email);
-            res.render('user_home', {email: users.email, list: list});
+            res.render('user_home', {email: users.email, list: []});
           }
         });
        }
