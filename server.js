@@ -1,12 +1,9 @@
 const express = require("express");
 const path = require("path");
-//const mysql = require("mysql");
 const dotenv = require("dotenv");
 const bodyparser = require('body-parser');
 let cors = require('cors')
 var hbs = require('hbs');
-const { extname } = require("path");
-// const path = require("path")
 
 hbs.registerPartials(path.join(__dirname + 'views/partials'));
 // Set env path
@@ -31,7 +28,7 @@ app.use('/', require('./routes/pages'));
 app.use('/vis', require('./routes/vis'));
 
 //AUTHORIZE FORM
-const authController = require('./controllers/auth'); 
+const authController = require('./controller/auth'); 
 app.post("/add", authController.register);
 app.post("/add_casualties", authController.add_casualties);
 app.post("/add_vehicles", authController.add_vehicles);
