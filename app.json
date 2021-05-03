@@ -1,0 +1,6 @@
+{
+  "name": "Accident Viz",
+  "description": "A Dynamic Dashboard for Visualising Accident Information",
+  "repository": "https://github.com/tanaypatankar/Road-Accident-Visualiser",
+  "keywords": ["node", "hbs", "mysql"]
+}
